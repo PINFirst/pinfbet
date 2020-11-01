@@ -130,3 +130,9 @@ dmypy.json
 
 # Add .idea
 .idea
+
+## add devenv
+env.dev.txt
+
+## config
+my.cnf
