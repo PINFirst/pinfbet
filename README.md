@@ -4,6 +4,9 @@
 
 # General Prerequisites
 
+## Install Python 3.8
+Make sure you install python 3.8 64 bits version.
+
 ## Install virtual env
 
 ```
@@ -14,11 +17,11 @@ pip install virtualenv
 
 ```
 python -m venv .venv
-```
+``` 
 ### Activate on windows:
 
 ```
-source ./venv/Scripts/activate
+.venv/Scripts/activate.bat
 ```
 
 ### Activate on linux:
@@ -33,7 +36,6 @@ source .venv/bin/activate
 sudo apt install mysql-server
 ```
 
-
 ## Create user database
 
 ```
@@ -45,7 +47,7 @@ CREATE user admin@localhost IDENTIFIED by 'admin078';
 CREATE DATABASE pinfbetdb;
 ```
 
-## Grant privileges to admin user
+## Grant privileges with admin user
 
 ```
 GRANT ALL PRIVILEGES on pinfbetdb.* to admin@localhost;
