@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from betsite import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('feed/', views.Feed.as_view(), name='feed')
 ]
