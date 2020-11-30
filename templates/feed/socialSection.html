@@ -1,10 +1,11 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/socialSection/socialSection.css' %}"/>
+<script src={% static 'js/feed/likeButton.js' %}></script>
 
 <div class="d-flex flex-column comment-section" id="myGroup">
     <div class="p-2">
         <div class="d-flex flex-row fs-12">
-            <div class="like p-2 cursor">
+            <div class="like p-2 cursor" id="likeBtn" onclick="changeLikeColor()">
                 <i class="fa fa-thumbs-up"></i>
             </div>
             <div class="like p-2 cursor action-collapse" data-toggle="collapse"
