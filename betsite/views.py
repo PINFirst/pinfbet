@@ -5,7 +5,7 @@ from django.views import View
 
 
 class Feed(View):
-    template = 'feed.html'
+    template = 'feed/feed.html'
 
     def get(self, request):
         return render(request, self.template)
