@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+{%load static%}
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+
+    <link rel="stylesheet" type="text/css" href="{%static 'css/registry/SignUp.css' %}">
+    <script defer src="{%static 'js/SignUp.js' %}"></script>
+
+
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Pinfbet</h1>
+        <p class="registro">Regístrate y empieza a apostar</p>
+        <form>
+            <p class="formulario">
+                <label for="nombre"></label><br/>
+                <input type="text" class="input" id="nombre" placeholder="Nombre*" onblur="revisar(this);revisarNombre(this)" onkeyup="revisarNombre(this)" autocomplete="off" required><br>
+                <label for="apellidos"></label><br/>
+                <input type="text" class="input" id="apellidos" placeholder="Apellido/s*" onblur="revisar(this);revisarApellidos(this)" onkeyup="revisarApellidos(this)" autocomplete="off" required><br>
+                <label for="correo"></label> <br/>
+                <input type="email" class="input" id = "correo" placeholder="Correo*" onblur="revisar(this);revisarEmail(this)" onkeyup="revisarEmail(this)" autocomplete="off" required><br>
+                <label for="usuario"></label><br/>
+                <input type="text" class="input" id = "usuario" placeholder="Usuario*" onblur="revisar(this)" autocomplete="off" required><br>
+                <label for="contraseña"></label><br/>
+                <input type="text" class="input" id = "Contraseña" placeholder="Contraseña*" onblur="revisar(this);revisaContrasena(this)"  onkeyup="revisaContrasena(this)" autocomplete="off" required><br>
+            </p>
+            <div class="condiciones">
+                <label><input type="checkbox" id="cbox1">Confirmas que entiendes y aceptas nuestras <a class="link" href="condiciones.html">Condiciones de uso y Política de privacidad.</a></label><br>
+            </div>
+
+            <div class="boton">
+                <input type="submit" value="Regístrate" class="button" onclick="Registro();">
+            </div>
+        </form>
+    </div>
+
+    <div class="contenedor2">
+        <p>¿Ya tienes una cuenta? <a class="link" href="">Iniciar Sesión</a></p>
+    </div>
+</body>
+</html>
