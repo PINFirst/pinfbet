@@ -9,3 +9,10 @@ class Feed(View):
 
     def get(self, request):
         return render(request, self.template)
+
+
+class SignUp(View):
+    template = 'SignUp.html'
+
+    def get(self, request):
+        return render(request, self.template)
