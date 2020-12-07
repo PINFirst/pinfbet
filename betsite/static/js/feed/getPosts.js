@@ -45,7 +45,7 @@ function createCard(card, index) {
 
     let post =
         "<div class=\"bg-white border mt-2\" id=\"post" + index + "\">\n" +
-        "    <div class=\"d-flex flex-row justify-content-between align-items-center p-2 \">\n" +
+        "    <div class=\"d-flex flex-row justify-content-between align-items-center p-3 \">\n" +
         "        <div class=\"d-flex flex-row align-items-center feed-text\">\n" +
         "            <div class=\"circle-img img-circle rounded-circle\">\n" +
         "                <img src=\"https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg\">\n" +
