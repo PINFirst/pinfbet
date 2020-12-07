@@ -2,7 +2,7 @@ function createSocialSection(index) {
     return " <div class=\"d-flex flex-column comment-section \" id=\"myGroup" + index + "\">\n" +
         "    <div class=\"p-2 p-2 border-bottom\">\n" +
         "        <div class=\"d-flex flex-row fs-12\">\n" +
-        "            <div class=\"like p-2 cursor\" id=\"likeBtn\" onclick=\"changeLikeColor()\">\n" +
+        "            <div class=\"like p-2 cursor\" id=\"likeBtn-" + index + "\" onclick=\"changeLikeColor(" + index + ")\">\n" +
         "                <i class=\"fa fa-thumbs-up\"></i>\n" +
         "            </div>\n" +
         "            <div class=\"like p-2 cursor action-collapse\" data-toggle=\"collapse\"\n" +
@@ -27,7 +27,7 @@ function createSocialSection(index) {
         "        <div class=\"mt-2 text-right action-collapse \">\n" +
         "            <button class=\"btn btn-primary btn-sm shadow-none\" type=\"button\" id=\"comment-button\" onclick=submitComment()>Comment</button>\n" +
         "            <button class=\"btn btn-outline-primary btn-sm ml-1 shadow-none \" data-toggle=\"collapse\"\n" +
-        "                    aria-expanded=\"true\" aria-controls=\"collapse-1\" href=\"#collapse-1\" href=\"#collapse-1\" type=\"button\">\n" +
+        "                    aria-expanded=\"true\" aria-controls=\"collapse-" + index + "\" href=\"#collapse-" + index + "\" href=\"#collapse-" + index + "\" type=\"button\">\n" +
         "                Cancel\n" +
         "            </button>\n" +
         "        </div>\n" +
