@@ -1,3 +1,12 @@
+function createPost(data) {
+
+    let post = document.createElement('div')
+    post.innerText = "posts"
+
+    data['posts'].forEach(createCard)
+
+
+}
 
 
 (
