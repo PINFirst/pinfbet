@@ -2,15 +2,29 @@
 {% load static %}
 
 {% block content %}
-<script>
-async function getPosts() {
-    let response = await fetch("get_posts")
-    let data = await response.json()
-    console.log(data)
-}
+    <script>
+        async function getPosts() {
+            try {
+                let response = await fetch("get_posts")
+                if (!response.ok)
+                    throw {
+                        status: response.status,
+                        statusText: response.statusText
+                    }
+                let data = await response.json()
+                console.log(data)
 
-getPosts()
-</script>
+            } catch (e) {
+                console.log(e)
+
+            } finally {
+
+            }
+
+        }
+
+        getPosts()
+    </script>
 
 <script src={% static 'js/feed/likeButton.js' %}></script>
 <script src={% static 'js/feed/submitComment.js' %}></script>
