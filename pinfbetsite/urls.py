@@ -20,6 +20,6 @@ from betsite import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('feed/', views.Feed.as_view(), name='feed')
+    path('', views.Feed.as_view(), name='feed'),
     path('get_posts', views.GetPosts.as_view()),
 ]
