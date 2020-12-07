@@ -1,5 +1,4 @@
 const submitComment = () => {
-    // const $fetch = document.getElementById("comment-message")
     addComment()
 };
 
@@ -58,8 +57,8 @@ async function addComment() {
     spanContentMessage.id = 'comment-message'
 
     divContent.appendChild(spanContentUserName)
-    divContent.appendChild(spanContentTime)
     divContent.appendChild(spanContentMessage)
+    divContent.appendChild(spanContentTime)
 
     let optionsIcon = document.createElement('i')
     optionsIcon.setAttribute('class', 'fa fa-ellipsis-v text-black-50 feed-icon ml-auto p-2')
