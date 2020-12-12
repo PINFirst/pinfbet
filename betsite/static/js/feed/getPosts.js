@@ -16,7 +16,7 @@ function createSocialSection(index) {
         "        </div>\n" +
         "    </div>\n" +
         "    <div id=\"collapse-" + index + "\" class=\"p-2 collapse\" data-parent=\"#myGroup" + index + "\">\n" +
-        "        <div id=\"comments\" class=\"d-flex flex-column p-2\">\n" +
+        "        <div id=\"comments"+index+"\" class=\"d-flex flex-column p-2\">\n" +
         "\n" +
         "\n" +
         "        </div>\n" +
@@ -25,7 +25,7 @@ function createSocialSection(index) {
         "            <textarea class=\"form-control ml-1 shadow-none textarea\" id=\"comment-message\"></textarea>\n" +
         "        </div>\n" +
         "        <div class=\"mt-2 text-right action-collapse \">\n" +
-        "            <button class=\"btn btn-primary btn-sm shadow-none\" type=\"button\" id=\"comment-button\" onclick=submitComment()>Comment</button>\n" +
+        "            <button class=\"btn btn-primary btn-sm shadow-none\" type=\"button\" id=\"comment-button\" onclick=submitComment("+index+")>Comment</button>\n" +
         "            <button class=\"btn btn-outline-primary btn-sm ml-1 shadow-none \" data-toggle=\"collapse\"\n" +
         "                    aria-expanded=\"true\" aria-controls=\"collapse-" + index + "\" href=\"#collapse-" + index + "\" href=\"#collapse-" + index + "\" type=\"button\">\n" +
         "                Cancel\n" +
@@ -66,7 +66,6 @@ function createCard(card, index) {
     $("#feed-content").append(post)
 
 }
-
 
 function createPost(data) {
 

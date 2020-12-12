@@ -1,5 +1,5 @@
-const submitComment = () => {
-    addComment()
+const submitComment = (index) => {
+    addComment(index)
 };
 
 function getMessageValue() {
@@ -11,13 +11,17 @@ function getMessageValue() {
 }
 
 
-async function addComment() {
+async function addComment(index) {
 
     let message = await getMessageValue()
 
+    let post = document.getElementById('comments'+index)
+    let n_comments = post.childElementCount
+
+
     let divComment = document.createElement('div')
     divComment.setAttribute('class', 'd-flex flex-row align-items-center feed-text px-2')
-    divComment.id = 'comment'
+    divComment.id = 'comment'+n_comments
 
     let divImg = document.createElement('div')
     divImg.setAttribute('class', 'circle-img img-circle rounded-circle justify-content-start')
@@ -65,6 +69,9 @@ async function addComment() {
 
     divComment.appendChild(optionsIcon)
 
-    document.getElementById('comments').appendChild(divComment)
+
+
+    post.appendChild(divComment)
+
 
 }
