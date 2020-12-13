@@ -1,48 +1,59 @@
 async function submitComment(index) {
 
-    let userName = document.querySelector("#post"+index+" #post-info #post-user").textContent
+    let userName = document.querySelector("#post" + index + " #post-info #post-user").textContent
     let message = await getMessageValue(index)
-    $("#comment-message"+index).val("")
+    $("#comment-message" + index).val("")
     let csrfToken = getCookie('csrftoken')
+    let textarea = $("#comment-message"+index);
 
-    console.log(userName)
 
-
-    try {
-        let response = await fetch("post_comment",
-            {
-                method: "post",
-                headers: {
-                    "Accept": 'application/json',
-                    "Content-Type": 'application/json',
-                    "X-CSRFToken": csrfToken,
-                },
-                body: JSON.stringify({
-                    user: userName,
-                    post: index,
-                    comment: message,
+    if (message.result) {
+        try {
+            let response = await fetch("post_comment",
+                {
+                    method: "post",
+                    headers: {
+                        "Accept": 'application/json',
+                        "Content-Type": 'application/json',
+                        "X-CSRFToken": csrfToken,
+                    },
+                    body: JSON.stringify({
+                        user: userName,
+                        post: index,
+                        comment: message,
+                    })
                 })
-            })
-        if (!response.ok) {
-            throw {
-                status: response.status,
-                statusText: response.statusText
+            if (!response.ok) {
+                throw {
+                    status: response.status,
+                    statusText: response.statusText
+                }
+
             }
+            addComment(index, message)
+            textarea.removeClass('error')
+            textarea.attr('placeholder', 'Escribe un comentario...')
+
+
+        } catch (e) {
+            console.log(e)
+
+        } finally {
 
         }
-        addComment(index, message)
-    } catch (e) {
-        console.log(e)
-
-    } finally {
+    } else {
+        console.log("no puedes enviar un mensaje vacío")
+        textarea.toggleClass('error')
+        textarea.attr('placeholder', 'No puede enviar un comentario vacio.')
 
     }
+
 }
 
 function getMessageValue(index) {
     return new Promise((resolve, reject) => {
         resolve({
-            result: $("#comment-message"+index).val()
+            result: $("#comment-message" + index).val()
         })
     });
 }
