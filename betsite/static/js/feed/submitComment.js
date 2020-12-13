@@ -97,10 +97,40 @@ async function addComment(index, message) {
     divContent.appendChild(spanContentMessage)
     divContent.appendChild(spanContentTime)
 
-    let optionsIcon = document.createElement('i')
-    optionsIcon.setAttribute('class', 'fa fa-ellipsis-v text-black-50 feed-icon ml-auto p-2')
 
-    divComment.appendChild(optionsIcon)
+    let dropDownOptions = document.createElement('div')
+    dropDownOptions.setAttribute('class', 'dropdown ml-auto p-2')
+
+    divComment.appendChild(dropDownOptions)
+
+
+    let optionsIcon = document.createElement('i')
+    optionsIcon.setAttribute('class', 'feed-icon px-2 fa fa-ellipsis-v ml-auto p-2')
+    optionsIcon.setAttribute('data-toggle', "dropdown")
+    optionsIcon.setAttribute('aria-expanded', "false")
+    // optionsIcon.setAttribute('type', 'button')
+    optionsIcon.setAttribute('id', 'commentOption'+index)
+
+    dropDownOptions.appendChild(optionsIcon)
+
+
+
+    let options = document.createElement('ul')
+    options.setAttribute('aria-labelledby', 'commentOption'+index)
+    options.setAttribute('class', 'dropdown-menu')
+
+    dropDownOptions.appendChild(options)
+
+
+    let optionDelete = document.createElement('li')
+
+    let optionDeleteAction = document.createElement('a')
+    optionDeleteAction.setAttribute('class', 'dropdown-item')
+    optionDeleteAction.setAttribute('href', '')
+    optionDeleteAction.innerText = "Eliminar"
+
+    optionDelete.appendChild(optionDeleteAction)
+    options.appendChild(optionDelete)
 
     post.appendChild(divComment)
 
