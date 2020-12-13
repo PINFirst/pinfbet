@@ -1,27 +1,62 @@
-const submitComment = (index) => {
-    addComment(index)
-};
+async function submitComment(index) {
 
-function getMessageValue() {
+    let userName = document.querySelector("#post"+index+" #post-info #post-user").textContent
+    let message = await getMessageValue(index)
+    let csrfToken = getCookie('csrftoken')
+
+    console.log(userName)
+
+
+    try {
+        let response = await fetch("post_comment",
+            {
+                method: "post",
+                headers: {
+                    "Accept": 'application/json',
+                    "Content-Type": 'application/json',
+                    "X-CSRFToken": csrfToken,
+                },
+                body: JSON.stringify({
+                    user: userName,
+                    post: index,
+                    comment: message,
+                })
+            })
+        if (!response.ok) {
+            throw {
+                status: response.status,
+                statusText: response.statusText
+            }
+
+        }
+        addComment(index, message)
+    } catch (e) {
+        console.log(e)
+
+    } finally {
+
+    }
+}
+
+function getMessageValue(index) {
     return new Promise((resolve, reject) => {
         resolve({
-            result: $("#comment-message").val()
+            result: $("#comment-message"+index).val()
         })
     });
 }
 
 
-async function addComment(index) {
+async function addComment(index, message) {
 
-    let message = await getMessageValue()
 
-    let post = document.getElementById('comments'+index)
+    let post = document.getElementById('comments' + index)
     let n_comments = post.childElementCount
 
 
     let divComment = document.createElement('div')
     divComment.setAttribute('class', 'd-flex flex-row align-items-center feed-text px-2')
-    divComment.id = 'comment'+n_comments
+    divComment.id = 'comment' + n_comments
 
     let divImg = document.createElement('div')
     divImg.setAttribute('class', 'circle-img img-circle rounded-circle justify-content-start')
@@ -36,7 +71,6 @@ async function addComment(index) {
     divImg.appendChild(imgProfile)
 
     divComment.appendChild(divImg)
-
 
 
     let divContent = document.createElement('div')
@@ -56,8 +90,7 @@ async function addComment(index) {
     spanContentTime.id = 'comment-time'
 
     let spanContentMessage = document.createElement('span')
-    spanContentMessage.setAttribute('class', 'font-weight-bold')
-    spanContentMessage.innerText = "Comentó: " + message.result
+    spanContentMessage.innerHTML = "<b>Comentó: </b>" + message.result
     spanContentMessage.id = 'comment-message'
 
     divContent.appendChild(spanContentUserName)
@@ -69,9 +102,6 @@ async function addComment(index) {
 
     divComment.appendChild(optionsIcon)
 
-
-
     post.appendChild(divComment)
-
 
 }
