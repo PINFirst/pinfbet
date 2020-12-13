@@ -88,3 +88,9 @@ class GetPosts(View):
 
     def get(self, request):
         return HttpResponse(json.dumps(self.data), content_type="application/json")
+
+
+class Comment(View):
+    def post(self, request):
+        print(request.body)
+        return HttpResponse(request)

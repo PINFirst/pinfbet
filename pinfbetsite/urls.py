@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Feed.as_view(), name='feed'),
     path('get_posts', views.GetPosts.as_view()),
+    path('post_comment', views.Comment.as_view()),
 ]
