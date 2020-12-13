@@ -16,3 +16,8 @@ class SignUp(View):
 
     def get(self, request):
         return render(request, self.template)
+class Terms(View):
+    template = 'Terms.html'
+
+    def get(self,request):
+        return render(request, self.template)
