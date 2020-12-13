@@ -94,3 +94,9 @@ class Comment(View):
     def post(self, request):
         print(request.body)
         return HttpResponse(request)
+
+
+class DeleteComment(View):
+    def get(self, request):
+        print("comentario eliminado")
+        return HttpResponse(request)

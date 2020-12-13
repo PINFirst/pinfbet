@@ -138,8 +138,10 @@ async function addComment(index, message) {
 
     let optionDeleteAction = document.createElement('a')
     optionDeleteAction.setAttribute('class', 'dropdown-item')
-    optionDeleteAction.setAttribute('href', '')
     optionDeleteAction.innerText = "Eliminar"
+    optionDeleteAction.onclick = () => {
+        deleteComments(index, n_comments)
+    }
 
     optionDelete.appendChild(optionDeleteAction)
     options.appendChild(optionDelete)
