@@ -30,7 +30,10 @@ async function submitComment(index) {
                 }
 
             }
-            addComment(index, message)
+            let user = "@Jeff"
+            let profilePic = 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg'
+            addComment(user, profilePic ,index, message.result)
+
             textarea.removeClass('error')
             textarea.attr('placeholder', 'Escribe un comentario...')
 
@@ -59,11 +62,11 @@ function getMessageValue(index) {
 }
 
 
-async function addComment(index, message) {
+async function addComment(userName, profilePic, postIndex, message) {
 
 
-    let post = document.getElementById('comments' + index)
-    let n_comments = post.childElementCount
+    let post = document.getElementById('comments' + postIndex)
+    let n_comments = post.childElementCount? post.childElementCount : 0
 
 
     let divComment = document.createElement('div')
@@ -77,7 +80,7 @@ async function addComment(index, message) {
 
 
     let imgProfile = document.createElement('img')
-    imgProfile.setAttribute('src', 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg')
+    imgProfile.setAttribute('src', profilePic)
     imgProfile.setAttribute('alt', 'user-image')
 
     divImg.appendChild(imgProfile)
@@ -93,7 +96,7 @@ async function addComment(index, message) {
 
     let spanContentUserName = document.createElement('span')
     spanContentUserName.setAttribute('class', 'font-weight-bold')
-    spanContentUserName.innerText = "@Username"
+    spanContentUserName.innerText = userName
     spanContentUserName.id = 'comment-userName'
 
     let spanContentTime = document.createElement('span')
@@ -102,7 +105,7 @@ async function addComment(index, message) {
     spanContentTime.id = 'comment-time'
 
     let spanContentMessage = document.createElement('span')
-    spanContentMessage.innerHTML = "<b>Comentó: </b>" + message.result
+    spanContentMessage.innerHTML = "<b>Comentó: </b>" + message
     spanContentMessage.id = 'comment-message'
 
     divContent.appendChild(spanContentUserName)
@@ -121,14 +124,13 @@ async function addComment(index, message) {
     optionsIcon.setAttribute('data-toggle', "dropdown")
     optionsIcon.setAttribute('aria-expanded', "false")
     // optionsIcon.setAttribute('type', 'button')
-    optionsIcon.setAttribute('id', 'commentOption'+index)
+    optionsIcon.setAttribute('id', 'commentOption' + postIndex)
 
     dropDownOptions.appendChild(optionsIcon)
 
 
-
     let options = document.createElement('ul')
-    options.setAttribute('aria-labelledby', 'commentOption'+index)
+    options.setAttribute('aria-labelledby', 'commentOption' + postIndex)
     options.setAttribute('class', 'dropdown-menu')
 
     dropDownOptions.appendChild(options)
@@ -140,7 +142,7 @@ async function addComment(index, message) {
     optionDeleteAction.setAttribute('class', 'dropdown-item')
     optionDeleteAction.innerText = "Eliminar"
     optionDeleteAction.onclick = () => {
-        deleteComments(index, n_comments)
+        deleteComments(postIndex, n_comments)
     }
 
     optionDelete.appendChild(optionDeleteAction)

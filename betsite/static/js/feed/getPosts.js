@@ -1,4 +1,4 @@
-function createSocialSection(index) {
+function createSocialSection(index, userLoggedImage) {
     return " <div class=\"d-flex flex-column comment-section \" id=\"myGroup" + index + "\">\n" +
         "    <div class=\"p-2 p-2 border-bottom\">\n" +
         "        <div class=\"d-flex flex-row fs-12\">\n" +
@@ -21,7 +21,9 @@ function createSocialSection(index) {
         "\n" +
         "        </div>\n" +
         "        <div class=\"d-flex flex-row align-items-start\" style=\"margin-top: 20px;\">\n" +
-        "            <img class=\"rounded-circle\" src=\"https://i.imgur.com/RpzrMR2.jpg\" width=\"40\">\n" +
+        "        <div class ='circle-img img-circle rounded-circle'>\n" +
+        "            <img src=" + userLoggedImage + ">\n" +
+        "        </div>  \n" +
         "            <textarea class=\"form-control ml-1 shadow-none textarea\" id=\"comment-message" + index + "\" placeholder=\"Escriba un comentario...\"></textarea>\n" +
         "        </div>\n" +
         "        <div class=\"mt-2 text-right action-collapse \">\n" +
@@ -40,7 +42,7 @@ function createCard(card, index) {
     console.log(card.User)
 
 
-    let socialSection = createSocialSection(index)
+    let socialSection = createSocialSection(index, card.profile_img)
 
 
     let post =
@@ -64,6 +66,12 @@ function createCard(card, index) {
         "</div>"
 
     $("#feed-content").append(post)
+
+
+    card.comments.forEach((comment) =>{
+        console.log(comment)
+        addComment("@"+comment.User, comment.profile_img, index, comment.message)
+    })
 
 }
 
