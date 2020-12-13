@@ -2,6 +2,7 @@ async function submitComment(index) {
 
     let userName = document.querySelector("#post"+index+" #post-info #post-user").textContent
     let message = await getMessageValue(index)
+    $("#comment-message"+index).val("")
     let csrfToken = getCookie('csrftoken')
 
     console.log(userName)

@@ -22,7 +22,7 @@ function createSocialSection(index) {
         "        </div>\n" +
         "        <div class=\"d-flex flex-row align-items-start\" style=\"margin-top: 20px;\">\n" +
         "            <img class=\"rounded-circle\" src=\"https://i.imgur.com/RpzrMR2.jpg\" width=\"40\">\n" +
-        "            <textarea class=\"form-control ml-1 shadow-none textarea\" id=\"comment-message" + index + "\"></textarea>\n" +
+        "            <textarea class=\"form-control ml-1 shadow-none textarea\" id=\"comment-message" + index + "\" placeholder=\"Escriba un comentario...\"></textarea>\n" +
         "        </div>\n" +
         "        <div class=\"mt-2 text-right action-collapse \">\n" +
         "            <button class=\"btn btn-primary btn-sm shadow-none\" type=\"button\" id=\"comment-button\" onclick=submitComment(" + index + ")>Comment</button>\n" +
