@@ -6,17 +6,6 @@ function revisar(elemento){
     }
 }
 
-function revisarEmail(elemento){
-    if(elemento.value!==''){
-        var data = elemento.value
-        var exp = /\w+@\w+\.+[a-z]/ //expresión de email
-        if(!exp.test(data)){ //si no cumple la expresión
-            elemento.className='error';
-        }else{
-            elemento.className='input';
-        }
-    }
-}
 function revisarNombre(elemento){
     if(elemento.value!==''){
         var data = elemento.value;
@@ -33,6 +22,17 @@ function revisarApellidos(elemento){
         var data = elemento.value;
         var exp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s[a-zA-ZÀ-ÿ\u00f1\u00d1]+)*$/; //expresión para uno o varios apellidos
         if(!exp.test(data)){
+            elemento.className='error';
+        }else{
+            elemento.className='input';
+        }
+    }
+}
+function revisarEmail(elemento){
+    if(elemento.value!==''){
+        var data = elemento.value
+        var exp = /\w+@\w+\.+[a-z]/ //expresión de email
+        if(!exp.test(data)){ //si no cumple la expresión
             elemento.className='error';
         }else{
             elemento.className='input';
