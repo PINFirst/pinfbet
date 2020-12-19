@@ -68,9 +68,9 @@ function createCard(card, index) {
     $("#feed-content").append(post)
 
 
-    card.comments.forEach((comment) =>{
+    card.comments.forEach((comment) => {
         console.log(comment)
-        addComment("@"+comment.User, comment.profile_img, index, comment.message)
+        addComment("@" + comment.User, comment.profile_img, index, comment.message)
     })
 
 }

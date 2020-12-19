@@ -58,7 +58,6 @@ class GetPosts(View):
               'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
               'message': 'Pfff'
               },
-
          ]
          },
         {'User': 'Sergio',
@@ -98,5 +97,5 @@ class Comment(View):
 
 class DeleteComment(View):
     def post(self, request):
-        print("Eliminado comentario ",request.body)
+        print("Eliminado comentario ", request.body)
         return HttpResponse(request)

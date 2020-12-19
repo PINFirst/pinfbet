@@ -32,7 +32,7 @@ async function submitComment(index) {
             }
             let user = "@Jeff"
             let profilePic = 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg'
-            addComment(user, profilePic ,index, message.result)
+            await addComment(user, profilePic, index, message.result)
 
             textarea.removeClass('error')
             textarea.attr('placeholder', 'Escribe un comentario...')
@@ -66,7 +66,7 @@ async function addComment(userName, profilePic, postIndex, message) {
 
 
     let post = document.getElementById('comments' + postIndex)
-    let n_comments = post.childElementCount? post.childElementCount : 0
+    let n_comments = post.childElementCount ? post.childElementCount : 0
 
 
     let divComment = document.createElement('div')
