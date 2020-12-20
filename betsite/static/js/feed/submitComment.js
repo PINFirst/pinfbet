@@ -123,6 +123,7 @@ async function addComment(userName, profilePic, postIndex, message) {
     optionsIcon.setAttribute('class', 'feed-icon px-2 fa fa-ellipsis-v ml-auto p-2')
     optionsIcon.setAttribute('data-toggle', "dropdown")
     optionsIcon.setAttribute('aria-expanded', "false")
+    optionsIcon.setAttribute('role', 'button')
     // optionsIcon.setAttribute('type', 'button')
     optionsIcon.setAttribute('id', 'commentOption' + postIndex)
 
@@ -140,6 +141,7 @@ async function addComment(userName, profilePic, postIndex, message) {
 
     let optionDeleteAction = document.createElement('a')
     optionDeleteAction.setAttribute('class', 'dropdown-item')
+    optionDeleteAction.setAttribute('role', 'button')
     optionDeleteAction.innerText = "Eliminar"
     optionDeleteAction.onclick = () => {
         deleteComments(postIndex, n_comments)
