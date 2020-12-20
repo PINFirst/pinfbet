@@ -24,4 +24,5 @@ urlpatterns = [
     path('get_posts', views.GetPosts.as_view()),
     path('post_comment', views.Comment.as_view()),
     path('delete_comment', views.DeleteComment.as_view()),
+    path('delete_post', views.DeletePost.as_view()),
 ]
