@@ -47,21 +47,26 @@ function createCard(card, index) {
 
     let post =
         "<div class=\"bg-white border mt-2\" id=\"post" + index + "\">\n" +
-        "    <div id =\"post-header\" class=\"d-flex flex-row justify-content-between align-items-center p-3 \">\n" +
+        "    <div id =\"post-header\" class=\" d-flex flex-row justify-content-between align-items-center p-3 \">\n" +
         "        <div class=\"d-flex flex-row align-items-center feed-text\">\n" +
         "            <div class=\"circle-img img-circle rounded-circle\">\n" +
         "                <img src=\"https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg\">\n" +
         "            </div>\n" +
         "            <div id=\"post-info\" class=\"d-flex flex-column flex-wrap ml-2\">\n" +
         "                <span class=\"font-weight-bold\" id=\"post-user\">@" + card.User + "</span>\n" +
-        "                <span id=\"post-type\"><b>Apostó:</b> Apruebo PCTR con un 10.</span>\n" +
-        "                <span class=\"text-black-50 time\" id=\"post-time\">35 minutes ago</span>\n" +
+        "                <span id=\"post-type\"><b>Apostó: </b>"+card.bet+"</span>\n" +
+        "                <span class=\"text-black-50 time\" id=\"post-time\">"+card.time + "</span>\n" +
         "            </div>\n" +
         "        </div>\n" +
-        "        <i class=\"feed-icon px-2 fa fa-ellipsis-v text-black-50\"></i>\n" +
+        "        <div class='dropdown ml-auto p-2'>"+
+        "           <i class=\"feed-icon px-2 fa fa-ellipsis-v ml-auto p-2\" data-toggle='dropdown' role='button' aria-haspopup=\"true\" aria-expanded='false' id=\"postOption"+index+"\"></i>\n" +
+        "           <ul aria-labelledby=\"postOption" + index + "\" class='dropdown-menu'>\n" +
+        "               <li> <a class='dropdown-item' onclick=deletePost(" + index + ") role='button'>Eliminar</a></li>\n"+
+        "           </ul>"+
+        "       </div>" +
         "    </div>\n" +
         "    <div id=\"post-content\"></div>\n" +
-        "    <span class=\"p-2 px-3\" id=\"post-message\">Hahahahan no me lo creo ni yo chavales .</span>\n" +
+        "    <span class=\"p-2 px-3\" id=\"post-message\">"+card.message+"</span>\n" +
         "\n" + socialSection +
         "</div>"
 
@@ -77,11 +82,7 @@ function createCard(card, index) {
 
 function createPost(data) {
 
-    let post = document.createElement('div')
-    post.innerText = "posts"
-
     data['posts'].forEach(createCard)
-
 
 }
 
