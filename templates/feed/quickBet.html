@@ -7,21 +7,20 @@
              aria-expanded="false" aria-controls="collapseQuickBet"></i>
     </div>
 </div>
-
 <div class=" collapse
         " id="collapseQuickBet">
     <div class="card card-body">
-        <form>
+        <form id="betForm">
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Apuesta</label>
-                <select required class="form-control" id="exampleFormControlSelect1">
+                <label for="betControlSelect">Apuesta</label>
+                <select required class="form-control" id="betControlSelect">
                     <option>Aprueba</option>
                     <option>Suspende</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Asignatura</label>
-                <select required class="form-control" id="exampleFormControlSelect1">
+                <label for="subjectControlSelect">Asignatura</label>
+                <select required class="form-control" id="subjectControlSelect">
                     <option>EDNL</option>
                     <option>PINF</option>
                     <option>AAED</option>
@@ -30,8 +29,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlSelect2">Nota</label>
-                <select required multiple class="form-control" id="exampleFormControlSelect2">
+                <label for="gradeControlSelect">Nota</label>
+                <select required multiple class="form-control" id="gradeControlSelect">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -45,10 +44,10 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlTextarea1">Mensaje</label>
-                <textarea required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <label for="messageFormControlTextArea">Mensaje</label>
+                <textarea required class="form-control" id="messageFormControlTextArea" rows="3"></textarea>
             </div>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button id="submitBetButton" class="btn btn-primary" onclick=sendPost()>Submit</button>
         </form>
 
     </div>
