@@ -5,16 +5,7 @@ from django.shortcuts import render
 from django.views import View
 import json
 
-
-class Feed(View):
-    template = 'feed/feed.html'
-
-    def get(self, request):
-        return render(request, self.template)
-
-
-class GetPosts(View):
-    data = {'posts': [
+data = {'posts': [
         {'User': 'Jeff',
          'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
          'message': 'Me quiero pegar un tiro',
@@ -88,8 +79,63 @@ class GetPosts(View):
          },
     ]}
 
+
+def get_user():
+    user = {}
+    user['name'] = 'Jeff'
+    user['profile_img'] = 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg'
+    return user
+
+
+class Feed(View):
+    template = 'feed/feed.html'
+
     def get(self, request):
-        return HttpResponse(json.dumps(self.data), content_type="application/json")
+        return render(request, self.template)
+
+
+class GetPosts(View):
+    def get(self, request):
+        global data
+        return HttpResponse(json.dumps(data), content_type="application/json")
+
+
+class SendPost(View):
+    def post(self, request):
+        print("Enviado comentario", request)
+
+        user = get_user()
+        #
+        data = json_data = json.loads(request.body)
+
+        print(data)
+
+        # post = {'User': user['name'],
+        #  'profile_img': user['profile_img'],
+        #  'message': 'Me quiero pegar un tiro',
+        #  'type': 'bet',
+        #  'bet': 'Apruebo EDNL con un 7',
+        #  'time': '35 minutes ago',
+        #  'image': None,
+        #  'image_url': None,
+        #  'comments': [
+        #      {'User': 'Sergio',
+        #       'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+        #       'message': 'Vamos a sacar un diez'
+        #       },
+        #      {'User': 'Sergio',
+        #       'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+        #       'message': 'Era broma'
+        #       },
+        #      {'User': 'Jeff',
+        #       'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+        #       'message': 'Pfff'
+        #       },
+        #
+        #  ]
+        #  }
+
+        return HttpResponse(request)
 
 
 class Comment(View):
