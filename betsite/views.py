@@ -3,7 +3,46 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views import View
+from datetime import datetime
 import json
+
+
+def time_ago_aux(ago, cal):
+    return (ago, cal) if ago == 1 else (ago, cal+'s')
+
+
+def time_ago(date):
+    now = datetime.now()
+
+    number = 0
+    cal = 'parsecs'
+
+    if now.year > date.year:
+        years_ago = now.year - date.year
+        number, cal = time_ago_aux(years_ago, 'year')
+    elif now.month > date.month:
+        months_ago = now.month - date.month
+        number, cal = time_ago_aux(months_ago, 'month')
+    elif now.day > date.day:
+        days_ago = now.day - date.day
+        number, cal = time_ago_aux(days_ago, 'day')
+
+    elif now.hour > date.hour:
+        hours_ago = now.hour - date.hour
+        number, cal = time_ago_aux(hours_ago, 'hour')
+
+    elif now.minute > date.minute:
+        minutes_ago = now.minute - date.minute
+        number, cal = time_ago_aux(minutes_ago, 'minute')
+
+    else:
+        seconds_ago = now.second - date.second
+        number, cal = time_ago_aux(seconds_ago, 'second')
+
+    time_msg = '{} {} ago'.format(number, cal)
+
+    return time_msg
+
 
 data = {'posts': [
         {'User': 'Jeff',
