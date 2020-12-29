@@ -141,38 +141,33 @@ class GetPosts(View):
 
 class SendPost(View):
     def post(self, request):
+        global data
         print("Enviado comentario", request)
 
         user = get_user()
-        #
-        data = json_data = json.loads(request.body)
 
-        print(data)
+        request_data = json.loads(request.body)
 
-        # post = {'User': user['name'],
-        #  'profile_img': user['profile_img'],
-        #  'message': 'Me quiero pegar un tiro',
-        #  'type': 'bet',
-        #  'bet': 'Apruebo EDNL con un 7',
-        #  'time': '35 minutes ago',
-        #  'image': None,
-        #  'image_url': None,
-        #  'comments': [
-        #      {'User': 'Sergio',
-        #       'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
-        #       'message': 'Vamos a sacar un diez'
-        #       },
-        #      {'User': 'Sergio',
-        #       'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
-        #       'message': 'Era broma'
-        #       },
-        #      {'User': 'Jeff',
-        #       'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
-        #       'message': 'Pfff'
-        #       },
-        #
-        #  ]
-        #  }
+        today = datetime.now()
+
+        time_message = time_ago(today)
+
+        if request_data['type'] == 'bet':
+            post = {'User': request_data['user'],
+             'profile_img': user['profile_img'],
+             'message': request_data['message'],
+             'type': request_data['type'],
+             'bet': request_data['bet'] + ' ' + request_data['subject'] + ' con un ' + request_data['grade'],
+             'time': time_message,
+             'image': None,
+             'image_url': None,
+             'comments': [
+             ]
+             }
+
+            data['posts'].append(post)
+
+            print(data)
 
         return HttpResponse(request)
 
