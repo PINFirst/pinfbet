@@ -1,4 +1,4 @@
-async function sendPost() {
+async function sendPost(type) {
 
     let csrfToken = getCookie('csrftoken')
     let userName = 'jeff'
@@ -24,7 +24,8 @@ async function sendPost() {
                         subject: subject.val(),
                         bet: bet.val(),
                         grade: grade.val()[0],
-                        comment: message.val(),
+                        message: message.val(),
+                        type: type,
                     })
                 })
             if (!response.ok) {
@@ -37,7 +38,9 @@ async function sendPost() {
             }
 
             $("#betForm").trigger('reset')
-
+            const myNode = document.getElementById("posts-content");
+            myNode.innerHTML = '';
+            await getPosts()
         } catch (e) {
             console.log(e)
 
@@ -45,7 +48,7 @@ async function sendPost() {
 
         }
     } else {
-        
+
         if (!bet.val()) {
             bet.toggleClass('error')
         }

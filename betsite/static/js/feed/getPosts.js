@@ -41,9 +41,7 @@ function createSocialSection(index, userLoggedImage) {
 function createCard(card, index) {
     console.log(card.User)
 
-
     let socialSection = createSocialSection(index, card.profile_img)
-
 
     let post =
         "<div class=\"bg-white border mt-2\" id=\"post" + index + "\">\n" +
@@ -54,23 +52,23 @@ function createCard(card, index) {
         "            </div>\n" +
         "            <div id=\"post-info\" class=\"d-flex flex-column flex-wrap ml-2\">\n" +
         "                <span class=\"font-weight-bold\" id=\"post-user\">@" + card.User + "</span>\n" +
-        "                <span id=\"post-type\"><b>Apostó: </b>"+card.bet+"</span>\n" +
-        "                <span class=\"text-black-50 time\" id=\"post-time\">"+card.time + "</span>\n" +
+        "                <span id=\"post-type\"><b>Apostó: </b>" + card.bet + "</span>\n" +
+        "                <span class=\"text-black-50 time\" id=\"post-time\">" + card.time + "</span>\n" +
         "            </div>\n" +
         "        </div>\n" +
-        "        <div class='dropdown ml-auto p-2'>"+
-        "           <i class=\"feed-icon px-2 fa fa-ellipsis-v ml-auto p-2\" data-toggle='dropdown' role='button' aria-haspopup=\"true\" aria-expanded='false' id=\"postOption"+index+"\"></i>\n" +
+        "        <div class='dropdown ml-auto p-2'>" +
+        "           <i class=\"feed-icon px-2 fa fa-ellipsis-v ml-auto p-2\" data-toggle='dropdown' role='button' aria-haspopup=\"true\" aria-expanded='false' id=\"postOption" + index + "\"></i>\n" +
         "           <ul aria-labelledby=\"postOption" + index + "\" class='dropdown-menu'>\n" +
-        "               <li> <a class='dropdown-item' onclick=deletePost(" + index + ") role='button'>Eliminar</a></li>\n"+
-        "           </ul>"+
+        "               <li> <a class='dropdown-item' onclick=deletePost(" + index + ") role='button'>Eliminar</a></li>\n" +
+        "           </ul>" +
         "       </div>" +
         "    </div>\n" +
         "    <div id=\"post-content\"></div>\n" +
-        "    <span class=\"p-2 px-3\" id=\"post-message\">"+card.message+"</span>\n" +
+        "    <span class=\"p-2 px-3\" id=\"post-message\">" + card.message + "</span>\n" +
         "\n" + socialSection +
         "</div>"
 
-    $("#feed-content").append(post)
+    $("#posts-content").append(post)
 
 
     card.comments.forEach((comment) => {
@@ -82,28 +80,32 @@ function createCard(card, index) {
 
 function createPost(data) {
 
+    console.log(data)
+
     data['posts'].forEach(createCard)
 
 }
 
-(
-    async function getPosts() {
-        try {
-            let response = await fetch("get_posts")
-            if (!response.ok)
-                throw {
-                    status: response.status,
-                    statusText: response.statusText
-                }
-            let data = await response.json()
-            console.log(data)
-            createPost(data)
+async function getPosts() {
+    try {
+        let response = await fetch("get_posts")
+        if (!response.ok)
+            throw {
+                status: response.status,
+                statusText: response.statusText
+            }
+        let data = await response.json()
+        console.log(data)
+        createPost(data)
 
-        } catch (e) {
-            console.log(e)
+    } catch (e) {
+        console.log(e)
 
-        } finally {
+    } finally {
 
-        }
     }
+}
+
+(
+     getPosts()
 )();

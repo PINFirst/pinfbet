@@ -57,7 +57,7 @@
             </div>
 
 
-            <a id="submitBetButton" class="btn btn-primary" onclick=sendPost()>Submit</a>
+            <a id="submitBetButton" class="btn btn-primary" onclick=sendPost('bet')>Submit</a>
 
         </form>
 
@@ -111,7 +111,7 @@
 
     plusButton.on("click", function () {
         $('#betForm').trigger("reset")
-        
+
         messageControl.removeClass('error')
         messageControl.attr('placeholder', 'Escriba un mensaje...')
         betControl.removeClass('error')
