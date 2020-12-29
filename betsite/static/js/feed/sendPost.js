@@ -35,14 +35,8 @@ async function sendPost() {
                 }
 
             }
-            let profilePic = 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg'
-            // await addComment(user, profilePic, index, message.result)
-            //
-            // textarea.removeClass('error')
-            // textarea.attr('placeholder', 'Escribe un comentario...')
 
-            console.log('sa enviao?')
-
+            $("#betForm").trigger('reset')
 
         } catch (e) {
             console.log(e)
@@ -51,12 +45,19 @@ async function sendPost() {
 
         }
     } else {
-
-        console.log("NO sa enviao")
-        // bet.val("")
-        // subject.val("")
-        // subject.attr('placeholder', 'elija una opcion')
-        // message.val("")
-        // message.attr('placeholder', 'Debe de escribir un comentario.')
+        
+        if (!bet.val()) {
+            bet.toggleClass('error')
+        }
+        if (!subject.val()) {
+            subject.toggleClass('error')
+        }
+        if (grade.val().length === 0) {
+            grade.toggleClass('error')
+        }
+        if (!message.val()) {
+            message.toggleClass('error')
+            message.attr('placeholder', 'No puede enviar un comentario vacio.')
+        }
     }
 }

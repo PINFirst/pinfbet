@@ -3,7 +3,7 @@
         <h6 class="mt-2">Realizar apuesta</h6>
     </div>
     <div class="feed-icon px-2">
-        <i class="fa fa-plus" data-toggle="collapse" href="#collapseQuickBet" role="button"
+        <i id="plusButton" class="fa fa-plus" data-toggle="collapse" href="#collapseQuickBet" role="button"
            aria-expanded="false" aria-controls="collapseQuickBet"></i>
     </div>
 </div>
@@ -67,7 +67,13 @@
 </div>
 
 <script>
-    $("#betControlSelect").on("change", function () {
+    let betControl = $("#betControlSelect")
+    let messageControl = $("#messageFormControlTextArea")
+    let subjectControl = $("#subjectControlSelect")
+    let gradeControl = $("#gradeControlSelect")
+    let plusButton = $("#plusButton")
+
+    betControl.on("change", function () {
         console.log($('#gradeControlSelect').val(""))
         let passedOptions = $('#passedOptions')
         let failedOptions = $('#failedOptions')
@@ -85,4 +91,26 @@
             failedOptions.prop('hidden', false);
         }
     })
+
+    messageControl.on("click", function () {
+        $(this).removeClass('error')
+        $(this).attr('placeholder', 'Escriba un mensaje...')
+    })
+
+    betControl.on("click", function () {
+        $(this).removeClass('error')
+    })
+
+    subjectControl.on("click", function () {
+        $(this).removeClass('error')
+    })
+
+    gradeControl.on("click", function () {
+        $(this).removeClass('error')
+    })
+
+    plusButton.on("click", function () {
+        $('#betForm').trigger("reset")
+    })
+
 </script>
