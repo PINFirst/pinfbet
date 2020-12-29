@@ -111,6 +111,13 @@
 
     plusButton.on("click", function () {
         $('#betForm').trigger("reset")
+        
+        messageControl.removeClass('error')
+        messageControl.attr('placeholder', 'Escriba un mensaje...')
+        betControl.removeClass('error')
+        subjectControl.removeClass('error')
+        gradeControl.removeClass('error')
+
     })
 
 </script>
