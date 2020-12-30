@@ -152,4 +152,7 @@ async function addComment(userName, profilePic, postIndex, message) {
 
     post.appendChild(divComment)
 
+    let commentsCounter = $("#commentsCounter" + postIndex)
+    commentsCounter.html(parseInt(commentsCounter.html())+1)
+
 }

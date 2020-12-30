@@ -28,6 +28,10 @@ async function deleteComments(postIndex, commentIndex) {
 
             }
             comment.remove()
+
+            let commentsCounter = $("#commentsCounter" + postIndex)
+            commentsCounter.html(parseInt(commentsCounter.html()) - 1)
+
         } catch (e) {
             console.log(e)
 

@@ -3,11 +3,11 @@ function createSocialSection(index, userLoggedImage) {
         "    <div class=\"p-2 p-2 border-bottom\">\n" +
         "        <div class=\"d-flex flex-row fs-12\">\n" +
         "            <div class=\"like p-2 cursor\" id=\"likeBtn-" + index + "\" onclick=\"changeLikeColor(" + index + ")\">\n" +
-        "                <i class=\"fa fa-thumbs-up\"></i>\n" +
+        "                <i class=\"fa fa-thumbs-up\"><span id=\"likesCounter" + index + "\" class=\"badge badge-light\"></span></i>\n" +
         "            </div>\n" +
         "            <div class=\"like p-2 cursor action-collapse\" data-toggle=\"collapse\"\n" +
         "                 aria-expanded=\"true\" aria-controls=\"collapse-" + index + "\" href=\"#collapse-" + index + "\">\n" +
-        "                <i class=\"fa fa-comments-o\"></i>\n" +
+        "                <i class=\"fa fa-comments-o\"><span id=\"commentsCounter" + index + "\" class=\"badge badge-light\"></span></i>\n" +
         "            </div>\n" +
         "            <div class=\"like p-2 cursor action-collapse\" data-toggle=\"collapse\" aria-expanded=\"true\"\n" +
         "                 aria-controls=\"collapse-2\">\n" +
@@ -38,13 +38,13 @@ function createSocialSection(index, userLoggedImage) {
 }
 
 
-function createCard(card, index) {
+function createCard(card) {
     console.log(card.User)
 
-    let socialSection = createSocialSection(index, card.profile_img)
+    let socialSection = createSocialSection(card.id, card.profile_img)
 
     let post =
-        "<div class=\"bg-white border mt-2\" id=\"post" + index + "\">\n" +
+        "<div class=\"bg-white border mt-2\" id=\"post" + card.id + "\">\n" +
         "    <div id =\"post-header\" class=\" d-flex flex-row justify-content-between align-items-center p-3 \">\n" +
         "        <div class=\"d-flex flex-row align-items-center feed-text\">\n" +
         "            <div class=\"circle-img img-circle rounded-circle\">\n" +
@@ -57,9 +57,9 @@ function createCard(card, index) {
         "            </div>\n" +
         "        </div>\n" +
         "        <div class='dropdown ml-auto p-2'>" +
-        "           <i class=\"feed-icon px-2 fa fa-ellipsis-v ml-auto p-2\" data-toggle='dropdown' role='button' aria-haspopup=\"true\" aria-expanded='false' id=\"postOption" + index + "\"></i>\n" +
-        "           <ul aria-labelledby=\"postOption" + index + "\" class='dropdown-menu'>\n" +
-        "               <li> <a class='dropdown-item' onclick=deletePost(" + index + ") role='button'>Eliminar</a></li>\n" +
+        "           <i class=\"feed-icon px-2 fa fa-ellipsis-v ml-auto p-2\" data-toggle='dropdown' role='button' aria-haspopup=\"true\" aria-expanded='false' id=\"postOption" + card.id + "\"></i>\n" +
+        "           <ul aria-labelledby=\"postOption" + card.id + "\" class='dropdown-menu'>\n" +
+        "               <li> <a class='dropdown-item' onclick=deletePost(" + card.id + ") role='button'>Eliminar</a></li>\n" +
         "           </ul>" +
         "       </div>" +
         "    </div>\n" +
@@ -73,9 +73,13 @@ function createCard(card, index) {
 
     card.comments.forEach((comment) => {
         console.log(comment)
-        addComment("@" + comment.User, comment.profile_img, index, comment.message)
+        addComment("@" + comment.User, comment.profile_img, card.id, comment.message)
     })
 
+    $("#commentsCounter" + card.id).html(card.comments.length)
+    $("#likesCounter" + card.id).html(card.likes.length)
+
+    console.log()
 }
 
 function createPost(data) {
@@ -107,5 +111,5 @@ async function getPosts() {
 }
 
 (
-     getPosts()
+    getPosts()
 )();
