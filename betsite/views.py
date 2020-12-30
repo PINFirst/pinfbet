@@ -6,9 +6,11 @@ from django.views import View
 from datetime import datetime
 import json
 
+from .database import data_posts, data_users
+
 
 def time_ago_aux(ago, cal):
-    return (ago, cal) if ago == 1 else (ago, cal+'s')
+    return (ago, cal) if ago == 1 else (ago, cal + 's')
 
 
 def time_ago(date):
@@ -44,81 +46,6 @@ def time_ago(date):
     return time_msg
 
 
-data = {'posts': [
-        {'User': 'Jeff',
-         'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
-         'message': 'Me quiero pegar un tiro',
-         'type': 'bet',
-         'bet': 'Apruebo EDNL con un 7',
-         'time': '35 minutes ago',
-         'image': None,
-         'image_url': None,
-         'comments': [
-             {'User': 'Sergio',
-              'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
-              'message': 'Vamos a sacar un diez'
-              },
-             {'User': 'Sergio',
-              'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
-              'message': 'Era broma'
-              },
-             {'User': 'Jeff',
-              'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
-              'message': 'Pfff'
-              },
-
-         ]
-         },
-        {'User': 'Maria',
-         'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
-         'message': 'Me quiero pegar un tiro x2',
-         'type': 'bet',
-         'bet': 'Apruebo PINF con un 5',
-         'time': '45 minutes ago',
-         'image': None,
-         'image_url': None,
-         'comments': [
-             {'User': 'Sergio',
-              'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
-              'message': 'Vamos a sacar un diez'
-              },
-             {'User': 'Sergio',
-              'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
-              'message': 'Era broma'
-              },
-             {'User': 'Jeff',
-              'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
-              'message': 'Pfff'
-              },
-         ]
-         },
-        {'User': 'Sergio',
-         'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
-         'message': 'Me quiero pegar un tiro x10',
-         'type': 'bet',
-         'bet': 'Apruebo PCTR con un 10',
-         'time': '55 minutes ago',
-         'image': None,
-         'image_url': None,
-         'comments': [
-             {'User': 'Sergio',
-              'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
-              'message': 'Vamos a sacar un diez'
-              },
-             {'User': 'Sergio',
-              'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
-              'message': 'Era broma'
-              },
-             {'User': 'Jeff',
-              'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
-              'message': 'Pfff'
-              },
-
-         ]
-         },
-    ]}
-
-
 def get_user():
     user = {}
     user['name'] = 'Jeff'
@@ -135,16 +62,15 @@ class Feed(View):
 
 class GetPosts(View):
     def get(self, request):
-        global data
-        return HttpResponse(json.dumps(data), content_type="application/json")
+        return HttpResponse(json.dumps(data_posts), content_type="application/json")
 
 
 class SendPost(View):
     def post(self, request):
-        global data
         print("Enviado comentario", request)
 
         user = get_user()
+        owner = 1
 
         request_data = json.loads(request.body)
 
@@ -153,21 +79,23 @@ class SendPost(View):
         time_message = time_ago(today)
 
         if request_data['type'] == 'bet':
-            post = {'User': request_data['user'],
-             'profile_img': user['profile_img'],
-             'message': request_data['message'],
-             'type': request_data['type'],
-             'bet': request_data['bet'] + ' ' + request_data['subject'] + ' con un ' + request_data['grade'],
-             'time': time_message,
-             'image': None,
-             'image_url': None,
-             'comments': [
-             ]
-             }
+            post = {
+                'id': len(data_posts['posts']) + 1,
+                'owner': owner,
+                'likes': [],
+                'User': request_data['user'],
+                'profile_img': user['profile_img'],
+                'message': request_data['message'],
+                'type': request_data['type'],
+                'bet': request_data['bet'] + ' ' + request_data['subject'] + ' con un ' + request_data['grade'],
+                'time': time_message,
+                'image': None,
+                'image_url': None,
+                'comments': [
+                ]
+            }
 
-            data['posts'].append(post)
-
-            print(data)
+            data_posts['posts'].append(post)
 
         return HttpResponse(request)
 
