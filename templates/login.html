@@ -30,7 +30,9 @@
                 <div class="col-12 user-img">
                     <img src="{% static '/images/user.png'%}" />
                 </div>
-                <form id="form" action="/" method="GET" class="col-12">
+                <form id="form" action="/" method="POST" class="col-12">
+                    {% csrf_token %}
+                    {{ form }}
                     <div class="form-group" id="user-group">
                         <input id="username" type="text" class="form-control" placeholder="Usuario" name="username" />
                         <small> Error message </small>
@@ -39,6 +41,9 @@
                         <input id="password" type="password" class="form-control" placeholder="Contraseña" name="password" />
                         <small> Error message </small>
                     </div>
+                    {% for message in messages %}
+                        <p id="messages"> {{message}} </p>
+                    {% endfor %}
                     <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Iniciar sesión
                     </button>
                 </form>
