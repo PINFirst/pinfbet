@@ -76,6 +76,11 @@ body{
     visibility: visible;
     border-color: red;
 }
+
+#messages{
+    color: black;
+}
+
 .form-group::before{
     font-family: "Font Awesome\ 5 Free";
     position: absolute;
