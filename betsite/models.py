@@ -1,6 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+class Subject(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Nombre asignatura')
+    course = models.CharField(max_length=100, verbose_name='Curso')
+    pass_rate = models.FloatField(verbose_name='Tasa de aprobados')
+
+    def __str__(self):
+        return self.name
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
