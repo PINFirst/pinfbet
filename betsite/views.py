@@ -53,11 +53,20 @@ def get_user_id(user_name):
 
     return None
 
+
 def get_user():
     user = {}
     user['name'] = 'Jeff'
     user['profile_img'] = 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg'
     return user
+
+
+def get_post(post_id):
+    for post in data_posts['posts']:
+        if post['id'] == post_id:
+            return post
+
+    return None
 
 
 class Feed(View):
