@@ -86,7 +86,7 @@ data_posts = {'posts': [
 
 data_users = {'users': [
     {'id': 1,
-     'user_name:': 'Jeff',
+     'user_name': 'Jeff',
      'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
      'mail': 'jeff@uca.es',
      'coins': 2000,
