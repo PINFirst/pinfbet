@@ -1,8 +1,10 @@
-function createSocialSection(index, userLoggedImage) {
+function createSocialSection(index, userLoggedImage, userName) {
+    args = userName+","+index
+    console.log(args)
     return " <div class=\"d-flex flex-column comment-section \" id=\"myGroup" + index + "\">\n" +
         "    <div class=\"p-2 p-2 border-bottom\">\n" +
         "        <div class=\"d-flex flex-row fs-12\">\n" +
-        "            <div class=\"like p-2 cursor\" id=\"likeBtn-" + index + "\" onclick=\"changeLikeColor(" + index + ")\">\n" +
+        "            <div class=\"like p-2 cursor\" id=\"likeBtn-" + index + "\" onclick=\"handleLike("+ index +")\">\n" +
         "                <i class=\"fa fa-thumbs-up\"><span id=\"likesCounter" + index + "\" class=\"badge badge-light\"></span></i>\n" +
         "            </div>\n" +
         "            <div class=\"like p-2 cursor action-collapse\" data-toggle=\"collapse\"\n" +
@@ -39,9 +41,8 @@ function createSocialSection(index, userLoggedImage) {
 
 
 function createCard(card) {
-    console.log(card.User)
 
-    let socialSection = createSocialSection(card.id, card.profile_img)
+    let socialSection = createSocialSection(card.id, card.profile_img, card.User)
 
     let post =
         "<div class=\"bg-white border mt-2\" id=\"post" + card.id + "\">\n" +
@@ -78,8 +79,19 @@ function createCard(card) {
 
     $("#commentsCounter" + card.id).html(card.comments.length)
     $("#likesCounter" + card.id).html(card.likes.length)
+    let userId = 1
+    console.log('user id')
+    console.log(userId)
+    console.log(card.likes)
 
-    console.log()
+    console.log(userId in card.likes)
+    if (card.likes.includes(userId)) {
+
+        document.getElementById("likeBtn-" + card.id ).style.color = 'orange'
+    }
+    else {
+        document.getElementById("likeBtn-" + card.id ).style.color = 'black'
+    }
 }
 
 function createPost(data) {
@@ -110,6 +122,5 @@ async function getPosts() {
     }
 }
 
-(
-    getPosts()
-)();
+
+getPosts()

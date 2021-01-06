@@ -69,6 +69,22 @@ def get_post(post_id):
     return None
 
 
+class HandleLike(View):
+    def post(self, request):
+        request_data = json.loads(request.body)
+        user_id = get_user_id(request_data['user'])
+        post = get_post(request_data['post'])
+        print(post)
+        if user_id in post['likes']:
+            post['likes'].remove(user_id)
+        elif user_id not in post['likes']:
+            post['likes'].append(user_id)
+
+        print(post)
+
+        return HttpResponse(request)
+
+
 class Feed(View):
     template = 'feed/feed.html'
 
@@ -111,7 +127,7 @@ class SendPost(View):
                 ]
             }
 
-            data_posts['posts'].append(post)
+            data_posts['posts'].insert(0, post)
 
         return HttpResponse(request)
 
