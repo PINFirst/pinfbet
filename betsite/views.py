@@ -46,6 +46,13 @@ def time_ago(date):
     return time_msg
 
 
+def get_user_id(user_name):
+    for user in data_users['users']:
+        if user['user_name'] == user_name:
+            return user['id']
+
+    return None
+
 def get_user():
     user = {}
     user['name'] = 'Jeff'
