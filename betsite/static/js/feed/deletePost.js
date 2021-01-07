@@ -1,13 +1,13 @@
-async function deleteComments(postIndex, commentIndex) {
-    let comment = document.querySelector("#post" + postIndex + " #comment" + commentIndex)
-    console.log("el comentario " + commentIndex + " del post " + postIndex + " ha sido eliminado")
+async function deletePost(index) {
+    let post = document.querySelector("#post" + index)
+    console.log("el post " + index + " ha sido eliminado")
 
     let csrfToken = getCookie('csrftoken')
 
 
-    if (comment) {
+    if (post) {
         try {
-            let response = await fetch("delete_comment",
+            let response = await fetch("delete_post",
                 {
                     method: "post",
                     headers: {
@@ -16,8 +16,7 @@ async function deleteComments(postIndex, commentIndex) {
                         "X-CSRFToken": csrfToken,
                     },
                     body: JSON.stringify({
-                        post: postIndex,
-                        comment: commentIndex,
+                        post: index,
                     })
                 })
             if (!response.ok) {
@@ -27,11 +26,7 @@ async function deleteComments(postIndex, commentIndex) {
                 }
 
             }
-            comment.remove()
-
-            let commentsCounter = $("#commentsCounter" + postIndex)
-            commentsCounter.html(parseInt(commentsCounter.html()) - 1)
-
+            post.remove()
         } catch (e) {
             console.log(e)
 
