@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-from betsite import views
+from betsite import views 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.Feed.as_view(), name='feed'),
+    path('', views.loginPage, name='login')
+    path('feed/', views.Feed.as_view(), name='feed'),
     path('get_posts/<int:page>', views.GetPosts.as_view()),
     path('post_comment', views.Comment.as_view()),
     path('send_post', views.SendPost.as_view()),

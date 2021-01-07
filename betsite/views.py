@@ -1,7 +1,10 @@
+
+from django.shortcuts import render, redirect
+
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render
-
-# Create your views here.
 from django.views import View
 from datetime import datetime
 import json
@@ -92,6 +95,22 @@ class Feed(View):
         return render(request, self.template)
 
 
+
+def loginPage(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('feed')
+        else:
+            messages.info(request, 'Usuario o contraseña incorrectas')
+            print('Usuario incorrecto')
+
+    return render(request, 'login.html')
+
 class GetPosts(View):
     def get(self, request, page=0):
         posts = data_posts['posts']
@@ -151,3 +170,4 @@ class DeletePost(View):
     def post(self, request):
         print('Eliminado post', request.body)
         return HttpResponse(request)
+
