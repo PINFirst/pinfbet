@@ -21,7 +21,7 @@ from betsite import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Feed.as_view(), name='feed'),
-    path('get_posts', views.GetPosts.as_view()),
+    path('get_posts/<int:page>', views.GetPosts.as_view()),
     path('post_comment', views.Comment.as_view()),
     path('send_post', views.SendPost.as_view()),
     path('delete_comment', views.DeleteComment.as_view()),

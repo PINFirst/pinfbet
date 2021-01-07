@@ -93,8 +93,11 @@ class Feed(View):
 
 
 class GetPosts(View):
-    def get(self, request):
-        return HttpResponse(json.dumps(data_posts), content_type="application/json")
+    def get(self, request, page=0):
+        posts = data_posts['posts']
+        post_paginated = posts[page:page + 5]
+
+        return HttpResponse(json.dumps(post_paginated), content_type="application/json")
 
 
 class SendPost(View):
