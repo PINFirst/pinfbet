@@ -42,6 +42,8 @@ function createSocialSection(index, userLoggedImage, userName) {
 
 function createCard(card) {
 
+    console.log(card)
+
     let socialSection = createSocialSection(card.id, card.profile_img, card.User)
 
     let post =
@@ -94,25 +96,31 @@ function createCard(card) {
     }
 }
 
-function createPost(data) {
+function createPost(posts) {
 
-    console.log(data)
+    console.log(posts)
 
-    data['posts'].forEach(createCard)
+    // data['posts'].forEach(createCard)
+    posts.forEach(createCard)
 
 }
 
-async function getPosts() {
+async function getPosts(page) {
     try {
-        let response = await fetch("get_posts")
+        let response = await fetch("get_posts/"+page)
         if (!response.ok)
             throw {
                 status: response.status,
-                statusText: response.statusText
+                statusText: response.statusText,
             }
-        let data = await response.json()
-        console.log(data)
-        createPost(data)
+        let posts = await response.json()
+        if(posts.length >0) {
+            createPost(posts)
+            return true
+        }
+        else {
+            return false
+        }
 
     } catch (e) {
         console.log(e)
@@ -123,4 +131,4 @@ async function getPosts() {
 }
 
 
-getPosts()
+getPosts(0)

@@ -9,6 +9,40 @@
     <script src={% static 'js/feed/delete_comment.js' %}></script>
     <script src={% static 'js/feed/deletePost.js' %}></script>
     <script src={% static 'js/feed/sendPost.js' %}></script>
+    <script>
+
+    let nPosts = 0
+    let atBottom = false
+
+    var position = $(window).scrollTop();
+
+
+    var whenScrlBottom = async function () {
+        var win_h = (self.innerHeight) ? self.innerHeight : document.body.clientHeight;    // gets window height
+
+        var scrl_pos = window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
+
+        // if scrollbar reaces to bottom
+        if (document.body.scrollHeight <= (scrl_pos + win_h) && !atBottom) {
+
+            let thereArePost = await getPosts(nPosts)
+            if (thereArePost) {
+                nPosts += 5
+                atBottom = true
+                console.log(nPosts)
+            }
+
+
+        } else if (document.body.scrollHeight > (scrl_pos + win_h) && atBottom)
+            atBottom = false
+    }
+
+// register event on scrollbar
+window.onscroll = whenScrlBottom
+
+</script>
+
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/bet_card/bet_card.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/socialSection/socialSection.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/feed/feed_content.css' %}"/>
@@ -25,3 +59,4 @@
         </div>
     </div>
 {% endblock %}
+

@@ -82,6 +82,258 @@ data_posts = {'posts': [
 
         ]
     },
+    {
+        'id': 4,
+        'owner': 1,
+        'likes': [],
+        'User': 'Jeff',
+        'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+        'message': 'Me quiero pegar un tiro x10',
+        'type': 'bet',
+        'bet': 'Apruebo PCTR con un 10',
+        'time': '55 minutes ago',
+        'image': None,
+        'image_url': None,
+        'comments': [
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Vamos a sacar un diez'
+             },
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Era broma'
+             },
+            {'User': 'Jeff',
+             'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+             'message': 'Pfff'
+             },
+
+        ]
+    },
+    {
+        'id': 5,
+        'owner': 1,
+        'likes': [],
+        'User': 'Jeff',
+        'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+        'message': 'Me quiero pegar un tiro x10',
+        'type': 'bet',
+        'bet': 'Apruebo PCTR con un 10',
+        'time': '55 minutes ago',
+        'image': None,
+        'image_url': None,
+        'comments': [
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Vamos a sacar un diez'
+             },
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Era broma'
+             },
+            {'User': 'Jeff',
+             'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+             'message': 'Pfff'
+             },
+
+        ]
+    },
+    {
+        'id': 6,
+        'owner': 1,
+        'likes': [],
+        'User': 'Jeff',
+        'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+        'message': 'Me quiero pegar un tiro x10',
+        'type': 'bet',
+        'bet': 'Apruebo PCTR con un 10',
+        'time': '55 minutes ago',
+        'image': None,
+        'image_url': None,
+        'comments': [
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Vamos a sacar un diez'
+             },
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Era broma'
+             },
+            {'User': 'Jeff',
+             'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+             'message': 'Pfff'
+             },
+
+        ]
+    },
+    {
+        'id': 7,
+        'owner': 1,
+        'likes': [],
+        'User': 'Jeff',
+        'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+        'message': 'Me quiero pegar un tiro x10',
+        'type': 'bet',
+        'bet': 'Apruebo PCTR con un 10',
+        'time': '55 minutes ago',
+        'image': None,
+        'image_url': None,
+        'comments': [
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Vamos a sacar un diez'
+             },
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Era broma'
+             },
+            {'User': 'Jeff',
+             'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+             'message': 'Pfff'
+             },
+
+        ]
+    },
+    {
+        'id': 8,
+        'owner': 1,
+        'likes': [],
+        'User': 'Jeff',
+        'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+        'message': 'Me quiero pegar un tiro x10',
+        'type': 'bet',
+        'bet': 'Apruebo PCTR con un 10',
+        'time': '55 minutes ago',
+        'image': None,
+        'image_url': None,
+        'comments': [
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Vamos a sacar un diez'
+             },
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Era broma'
+             },
+            {'User': 'Jeff',
+             'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+             'message': 'Pfff'
+             },
+
+        ]
+    },
+    {
+        'id': 8,
+        'owner': 1,
+        'likes': [],
+        'User': 'Jeff',
+        'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+        'message': 'Me quiero pegar un tiro x10',
+        'type': 'bet',
+        'bet': 'Apruebo PCTR con un 10',
+        'time': '55 minutes ago',
+        'image': None,
+        'image_url': None,
+        'comments': [
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Vamos a sacar un diez'
+             },
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Era broma'
+             },
+            {'User': 'Jeff',
+             'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+             'message': 'Pfff'
+             },
+
+        ]
+    },
+    {
+        'id': 8,
+        'owner': 1,
+        'likes': [],
+        'User': 'Jeff',
+        'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+        'message': 'Me quiero pegar un tiro x10',
+        'type': 'bet',
+        'bet': 'Apruebo PCTR con un 10',
+        'time': '55 minutes ago',
+        'image': None,
+        'image_url': None,
+        'comments': [
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Vamos a sacar un diez'
+             },
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Era broma'
+             },
+            {'User': 'Jeff',
+             'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+             'message': 'Pfff'
+             },
+
+        ]
+    },
+    {
+        'id': 8,
+        'owner': 1,
+        'likes': [],
+        'User': 'Jeff',
+        'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+        'message': 'Me quiero pegar un tiro x10',
+        'type': 'bet',
+        'bet': 'Apruebo PCTR con un 10',
+        'time': '55 minutes ago',
+        'image': None,
+        'image_url': None,
+        'comments': [
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Vamos a sacar un diez'
+             },
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Era broma'
+             },
+            {'User': 'Jeff',
+             'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+             'message': 'Pfff'
+             },
+
+        ]
+    },
+    {
+        'id': 8,
+        'owner': 1,
+        'likes': [],
+        'User': 'Jeff',
+        'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+        'message': 'Me quiero pegar un tiro x10',
+        'type': 'bet',
+        'bet': 'Apruebo PCTR con un 10',
+        'time': '55 minutes ago',
+        'image': None,
+        'image_url': None,
+        'comments': [
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Vamos a sacar un diez'
+             },
+            {'User': 'Sergio',
+             'profile_img': 'https://images.pexels.com/photos/1998456/pexels-photo-1998456.jpeg',
+             'message': 'Era broma'
+             },
+            {'User': 'Jeff',
+             'profile_img': 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg',
+             'message': 'Pfff'
+             },
+
+        ]
+    },
 ]}
 
 data_users = {'users': [
