@@ -15,12 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from betsite import views as betsite_views
-from django.contrib.auth import views as auth_views
+from betsite import views 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('feed/', betsite_views.Feed.as_view(), name='feed'),
-    path('', betsite_views.loginPage, name='login')
-    #path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login')
+    path('', views.loginPage, name='login')
+    path('feed/', views.Feed.as_view(), name='feed'),
+    path('get_posts/<int:page>', views.GetPosts.as_view()),
+    path('post_comment', views.Comment.as_view()),
+    path('send_post', views.SendPost.as_view()),
+    path('delete_comment', views.DeleteComment.as_view()),
+    path('delete_post', views.DeletePost.as_view()),
+    path('handle_like', views.HandleLike.as_view()),
 ]
