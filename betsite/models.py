@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Subject(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre asignatura')
     course = models.CharField(max_length=100, verbose_name='Curso')
@@ -8,6 +9,10 @@ class Subject(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Asignatura'
+        verbose_name_plural = 'Asignaturas'
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
