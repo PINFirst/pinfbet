@@ -39,7 +39,7 @@ body {
 }
 
 .textarea.error, #messageFormControlTextArea.error, #betControlSelect.error, #gradeControlSelect.error,
-#subjectControlSelect.error {
+#subjectControlSelect.error, #cuantia.error {
     border: 1px solid red !important;
     box-shadow: 0 0 1px red !important;
 }
