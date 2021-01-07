@@ -25,3 +25,7 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name + ' ' + self.user.first_name + ' ' + self.user.last_name + ' (' + self.user.username + ')'
+
+    class Meta:
+        verbose_name = 'Alumno'
+        verbose_name_plural = 'Alumnos'
