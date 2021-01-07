@@ -55,7 +55,7 @@ function createCard(card) {
         "            </div>\n" +
         "            <div id=\"post-info\" class=\"d-flex flex-column flex-wrap ml-2\">\n" +
         "                <span class=\"font-weight-bold\" id=\"post-user\">@" + card.User + "</span>\n" +
-        "                <span id=\"post-type\"><b>Apostó: </b>" + card.bet + "</span>\n" +
+        "                <span id=\"post-type\"><b>Apostó "+card.coins +" coins: </b>" + card.bet + "</span>\n" +
         "                <span class=\"text-black-50 time\" id=\"post-time\">" + card.time + "</span>\n" +
         "            </div>\n" +
         "        </div>\n" +

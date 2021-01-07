@@ -102,12 +102,11 @@ class GetPosts(View):
 
 class SendPost(View):
     def post(self, request):
-        print("Enviado comentario", request)
-
         user = get_user()
         owner = 1
 
         request_data = json.loads(request.body)
+        print(request_data)
 
         today = datetime.now()
 
@@ -123,6 +122,7 @@ class SendPost(View):
                 'message': request_data['message'],
                 'type': request_data['type'],
                 'bet': request_data['bet'] + ' ' + request_data['subject'] + ' con un ' + request_data['grade'],
+                'coins': request_data['coins'],
                 'time': time_message,
                 'image': None,
                 'image_url': None,

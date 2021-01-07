@@ -7,9 +7,12 @@ async function sendPost(type) {
     let bet = $('#betControlSelect')
     let grade = $('#gradeControlSelect')
     let message = $('#messageFormControlTextArea')
+    let coins = $('#cuantia')
 
+    console.log('coins')
+    console.log(coins.val())
 
-    if (subject.val() && bet.val() && grade.val() && message.val()) {
+    if (subject.val() && bet.val() && grade.val() && message.val() && coins.val() && coins.val() <= pinfCoins) {
         try {
             let response = await fetch("send_post",
                 {
@@ -25,6 +28,7 @@ async function sendPost(type) {
                         bet: bet.val(),
                         grade: grade.val()[0],
                         message: message.val(),
+                        coins: coins.val(),
                         type: type,
                     })
                 })
@@ -40,7 +44,7 @@ async function sendPost(type) {
             $("#betForm").trigger('reset')
             const myNode = document.getElementById("posts-content");
             myNode.innerHTML = '';
-            await getPosts()
+            await getPosts(0)
         } catch (e) {
             console.log(e)
 
@@ -61,6 +65,10 @@ async function sendPost(type) {
         if (!message.val()) {
             message.toggleClass('error')
             message.attr('placeholder', 'No puede enviar un comentario vacio.')
+        }
+        if(!coins.val() || coins.val() && coins.val() > pinfCoins) {
+            coins.toggleClass('error')
+
         }
     }
 }
