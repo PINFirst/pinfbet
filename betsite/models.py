@@ -38,3 +38,16 @@ class Grade(models.Model):
     class Meta:
         verbose_name = 'Nota'
         verbose_name_plural = 'Notas'
+
+class Bet(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name='Alumno')
+    friend = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='friend', verbose_name='Amigo apostado')
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name='Asignatura')
+    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, verbose_name='Nota apostada')
+    coins = models.FloatField()
+    start_date = models.DateTimeField(auto_now_add=True, verbose_name='Fecha apuesta')
+    end_date = models.DateTimeField(verbose_name='Fecha fin de apuesta')
+
+    class Meta:
+        verbose_name = 'Apuesta'
+        verbose_name_plural = 'Apuestas'
