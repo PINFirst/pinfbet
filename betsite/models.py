@@ -29,3 +29,12 @@ class Student(models.Model):
     class Meta:
         verbose_name = 'Alumno'
         verbose_name_plural = 'Alumnos'
+
+class Grade(models.Model):
+    int_grade = models.IntegerField()
+    float_grade = models.FloatField()
+    range_grade = models.TextChoices('RangeGrade', 'INSUFICIENTE SUFICIENTE BIEN NOTABLE SOBRESALIENTE')
+
+    class Meta:
+        verbose_name = 'Nota'
+        verbose_name_plural = 'Notas'
