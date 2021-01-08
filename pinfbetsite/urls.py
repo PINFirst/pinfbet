@@ -20,7 +20,7 @@ from betsite import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.loginPage, name='login')
+    path('', views.loginPage, name='login'),
     path('feed/', views.Feed.as_view(), name='feed'),
     path('get_posts/<int:page>', views.GetPosts.as_view()),
     path('post_comment', views.Comment.as_view()),
@@ -28,6 +28,6 @@ urlpatterns = [
     path('delete_comment', views.DeleteComment.as_view()),
     path('delete_post', views.DeletePost.as_view()),
     path('handle_like', views.HandleLike.as_view()),
-  path('SignUp/', views.register, name='SignUp'),
+    path('SignUp/', views.register, name='SignUp'),
     path('SignUp/Terms/', views.Terms.as_view(), name='Terms')
 ]
