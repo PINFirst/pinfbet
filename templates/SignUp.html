@@ -15,31 +15,20 @@
     <div class="contenedor">
         <h1>Pinfbet</h1>
         <p class="registro">Regístrate y empieza a apostar</p>
-        <form>
-            <p class="formulario">
-                <label for="nombre"></label><br/>
-                <input type="text" class="input" id="nombre" placeholder="Nombre*" onblur="revisar(this);revisarNombre(this)" onkeyup="revisarNombre(this)" autocomplete="off" required><br>
-                <label for="apellidos"></label><br/>
-                <input type="text" class="input" id="apellidos" placeholder="Apellido/s*" onblur="revisar(this);revisarApellidos(this)" onkeyup="revisarApellidos(this)" autocomplete="off" required><br>
-                <label for="correo"></label> <br/>
-                <input type="email" class="input" id = "correo" placeholder="Correo*" onblur="revisar(this);revisarEmail(this)" onkeyup="revisarEmail(this)" autocomplete="off" required><br>
-                <label for="usuario"></label><br/>
-                <input type="text" class="input" id = "usuario" placeholder="Usuario*" onblur="revisar(this)" autocomplete="off" required><br>
-                <label for="contraseña"></label><br/>
-                <input type="text" class="input" id = "contraseña" placeholder="Contraseña*" onblur="revisar(this)" autocomplete="off" required><br>
-            </p>
-            <div class="condiciones">
-                <label><input type="checkbox" id="cbox1">Confirmas que entiendes y aceptas nuestras <a class="link" href="Terms">Condiciones de uso y Política de privacidad.</a></label><br>
+        <form action="" method="post" name="register" id="register">
+            {% csrf_token %}
+            {{ form }}
+
+            <div id="condiciones" class="condiciones">
+                <p>Al registraste confirmas que entiendes y aceptas nuestras <a class="link" href="Terms" target="_blank">Condiciones de uso y Política de privacidad.</a></p><br>
             </div>
 
-            <div class="boton">
-                <input type="submit" value="Regístrate" class="button" onclick="Registro();">
-            </div>
+            <input type="submit" value="Regístrate" class="button" onclick="validate()">
+
         </form>
     </div>
-
     <div class="contenedor2">
-        <p>¿Ya tienes una cuenta? <a class="link" href="">Iniciar Sesión</a></p>
+        <p>¿Ya tienes una cuenta? <a class="link" href="login">Iniciar Sesión</a></p>
     </div>
 </body>
 </html>
