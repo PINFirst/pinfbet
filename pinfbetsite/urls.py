@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from betsite import views 
+
+from betsite import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +28,6 @@ urlpatterns = [
     path('delete_comment', views.DeleteComment.as_view()),
     path('delete_post', views.DeletePost.as_view()),
     path('handle_like', views.HandleLike.as_view()),
+  path('SignUp/', views.register, name='SignUp'),
+    path('SignUp/Terms/', views.Terms.as_view(), name='Terms')
 ]
