@@ -15,12 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from betsite import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('feed/', views.Feed.as_view(), name='feed'),
-    path('SignUp/', views.SignUp.as_view(), name='SignUp'),
-    path('SignUp/Terms/',views.Terms.as_view(), name='Terms')
+    path('SignUp/', views.register, name='SignUp'),
+    path('SignUp/Terms/', views.Terms.as_view(), name='Terms')
 ]
