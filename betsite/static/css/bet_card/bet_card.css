@@ -19,13 +19,27 @@ body {
 }
 
 .circle-img {
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
 }
 
 .circle-img img {
-  height: 100%;
-  transform: translateX(-50%);
-  margin-left: 50%;
+    height: 100%;
+    transform: translateX(-50%);
+    margin-left: 50%;
+}
+
+#comment {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.textarea.error, #messageFormControlTextArea.error, #betControlSelect.error, #gradeControlSelect.error,
+#subjectControlSelect.error, #cuantia.error {
+    border: 1px solid red !important;
+    box-shadow: 0 0 1px red !important;
 }

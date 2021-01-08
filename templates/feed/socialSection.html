@@ -1,0 +1,40 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/socialSection/socialSection.css' %}"/>
+
+
+<div class="d-flex flex-column comment-section " id="myGroup">
+    <div class="p-2 p-2 border-bottom">
+        <div class="d-flex flex-row fs-12">
+            <div class="like p-2 cursor" id="likeBtn" onclick="changeLikeColor()">
+                <i class="fa fa-thumbs-up"></i>
+            </div>
+            <div class="like p-2 cursor action-collapse" data-toggle="collapse"
+                 aria-expanded="true" aria-controls="collapse-9" href="#collapse-9">
+                <i class="fa fa-comments-o"></i>
+            </div>
+            <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true"
+                 aria-controls="collapse-2">
+                <i class="fa fa-share"></i>
+            </div>
+        </div>
+    </div>
+    <div id="collapse-9" class="p-2 collapse" data-parent="#myGroup">
+        <div id="comments" class="d-flex flex-column p-2">
+
+
+        </div>
+        <div class="d-flex flex-row align-items-start" style="margin-top: 20px;">
+            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+            <textarea class="form-control ml-1 shadow-none textarea" id="comment-message"></textarea>
+        </div>
+        <div class="mt-2 text-right action-collapse ">
+            <button class="btn btn-primary btn-sm shadow-none" type="button" id="comment-button"
+                    onclick=submitComment()>Comment
+            </button>
+            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none " data-toggle="collapse"
+                    aria-expanded="true" aria-controls="collapse-9" href="#collapse-9" href="#collapse-9" type="button">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

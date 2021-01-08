@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <script src={% static 'js/feed/likeButton.js' %}></script>
+    <script src={% static 'js/feed/submitComment.js' %}></script>
+    <script src={% static 'js/feed/getPosts.js' %}></script>
+    <script src={% static 'js/feed/delete_comment.js' %}></script>
+    <script src={% static 'js/feed/deletePost.js' %}></script>
+    <script src={% static 'js/feed/sendPost.js' %}></script>
+    <script>
+
+    let nPosts = 0
+    let atBottom = false
+
+    var position = $(window).scrollTop();
+
+
+    var whenScrlBottom = async function () {
+        var win_h = (self.innerHeight) ? self.innerHeight : document.body.clientHeight;    // gets window height
+
+        var scrl_pos = window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
+
+        // if scrollbar reaces to bottom
+        if (document.body.scrollHeight <= (scrl_pos + win_h) && !atBottom) {
+
+            let thereArePost = await getPosts(nPosts)
+            if (thereArePost) {
+                nPosts += 5
+                atBottom = true
+                console.log(nPosts)
+            }
+
+
+        } else if (document.body.scrollHeight > (scrl_pos + win_h) && atBottom)
+            atBottom = false
+    }
+
+// register event on scrollbar
+window.onscroll = whenScrlBottom
+
+</script>
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bet_card/bet_card.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/socialSection/socialSection.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/feed/feed_content.css' %}"/>
+
+    <div class="container mt-4 mb-5">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-8">
+                <div class="feed p-2" id="feed-content">
+                    {% include 'feed/quickBet.html' %}
+                    <div id="posts-content"></div>
+                    {#                    {% include 'feed/betCard.html' %}#}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
