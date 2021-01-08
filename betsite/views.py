@@ -110,13 +110,13 @@ def register(request):
 class Terms(View):
     template = 'Terms.html'
     
-     def get(self, request):
+    def get(self, request):
         return render(request, self.template)
       
 class Feed(View):
     template = 'feed/feed.html'
     
-     def get(self, request):
+    def get(self, request):
         return render(request, self.template)
 
    
