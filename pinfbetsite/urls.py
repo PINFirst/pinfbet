@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.loginPage, name='login'),
     path('feed/', views.Feed.as_view(), name='feed'),
+    path('bets/', views.bet_list, name='bets'),
     path('get_posts/<int:page>', views.GetPosts.as_view()),
     path('post_comment', views.Comment.as_view()),
     path('send_post', views.SendPost.as_view()),
