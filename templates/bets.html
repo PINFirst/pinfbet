@@ -2,9 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Mis apuestas</title>
+
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+
 </head>
-<body>
-$END$
+<body style="background-color: #212529;">
+    <header>
+        <div class="d-flex flex-md-fill justify-content-start" style= "background:orange; font-family:Lobster;">
+            <h1>P1nfBET</h1>
+        </div>
+    </header>
+    {% include "navbar.html" %}
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Alumno</th>
+          <th scope="col">Amigo</th>
+          <th scope="col">Asignatura</th>
+          <th scope="col">Nota</th>
+          <th scope="col">Coins</th>
+          <th scope="col">Fecha finalización</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bet in bets %}
+        <tr>
+            <td>{{bet.student.name}}</td>
+            <td>{{bet.friend}}</td>
+            <td>{{bet.subject}}</td>
+            <td>{{bet.grade}}</td>
+            <td>{{bet.coins}}</td>
+            <td>{{bet.end_date|date:'d/m/Y H:i:s'}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 </body>
 </html>
