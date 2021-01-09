@@ -3,6 +3,7 @@ from django import forms
 from django.views import View
 from .forms import RegisterForm
 from django.contrib.auth.models import User
+from .models import Student
 from django.contrib import messages
 from .models import Student
 from django.http import HttpResponse
@@ -103,8 +104,10 @@ def register(request):
         newUser.email = email
         newUser.set_password(password)
         newUser.save()
+        newStudent = Student(user=newUser)
+        newStudent.save()
         login(request, newUser)
-        return redirect("Feed")
+        return redirect("feed")
     return render(request, 'SignUp.html', {'form': form})
 
 
@@ -197,3 +200,18 @@ class DeletePost(View):
     def post(self, request):
         print('Eliminado post', request.body)
         return HttpResponse(request)
+
+
+def account_view(request, *args, **kwargs):
+
+    context = {}
+    user_id = kwargs.get("user_id")
+    try:
+        account = User.objects.get(username=user_id)
+    except:
+        return HttpResponse("Something went wrong.")
+    if account:
+        context['id'] = account.id
+        context['username'] = account.username
+        context['email'] = account.email
+        return render(request, "account.html", context)
