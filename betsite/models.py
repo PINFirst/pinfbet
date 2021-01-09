@@ -24,7 +24,7 @@ class Student(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics', verbose_name='Imagen de perfil')
     coins = models.FloatField(default=0)
     current_subjects = models.ManyToManyField(Subject, verbose_name='Asignaturas matriculadas')
-    passed_subjects = models.ManyToManyField(Subject, verbose_name='Asignaturas aprobadas', related_name='passed_subjects')
+    passed_subjects = models.ManyToManyField(Subject, null=True, blank=True, verbose_name='Asignaturas aprobadas', related_name='passed_subjects')
 
     def __str__(self):
         return self.name + ' ' + self.user.first_name + ' ' + self.user.last_name + ' (' + self.user.username + ')'
