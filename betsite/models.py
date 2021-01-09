@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -34,12 +35,16 @@ class Student(models.Model):
 
 class Bet(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name='Alumno')
-    friend = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='friend', verbose_name='Amigo apostado')
+    friend = models.ForeignKey(Student, on_delete=models.CASCADE, blank=True, null=True, related_name='friend', verbose_name='Amigo apostado')
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name='Asignatura')
-    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, verbose_name='Nota apostada')
+    grade = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(0)], verbose_name='Nota apostada')
     coins = models.FloatField()
     start_date = models.DateTimeField(auto_now_add=True, verbose_name='Fecha apuesta')
     end_date = models.DateTimeField(verbose_name='Fecha fin de apuesta')
+
+    def __str__(self):
+        return self.student.user.username + ' ' + self.start_date.strftime("%d/%m/%Y %H:%M:%S")
+
 
     class Meta:
         verbose_name = 'Apuesta'
