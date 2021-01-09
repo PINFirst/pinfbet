@@ -15,16 +15,17 @@
             <h1>P1nfBET</h1>
         </div>
     </header>
-    {% include "navbar.html" %}
+    {% include 'base/navbar.html' %}
     <table class="table table-dark">
       <thead>
         <tr>
           <th scope="col">Alumno</th>
           <th scope="col">Amigo</th>
           <th scope="col">Asignatura</th>
-          <th scope="col">Nota</th>
+          <th scope="col">Nota apostada</th>
           <th scope="col">Coins</th>
           <th scope="col">Fecha finalización</th>
+          <th scope="col">Nota sacada</th>
         </tr>
       </thead>
       <tbody>
@@ -36,6 +37,8 @@
             <td>{{bet.grade}}</td>
             <td>{{bet.coins}}</td>
             <td>{{bet.end_date|date:'d/m/Y H:i:s'}}</td>
+            <td> <input type="number" min="0" max="10"> </td>
+            <td> <button type="button" class="btn btn-light">Cobrar apuesta</button> </td>
         </tr>
         {% endfor %}
       </tbody>
