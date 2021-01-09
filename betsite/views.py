@@ -11,6 +11,7 @@ from django.contrib.auth import login, authenticate, logout
 from datetime import datetime
 import json
 from .database import data_posts, data_users
+from .models import Bet
 
 
 def time_ago_aux(ago, cal):
@@ -134,9 +135,12 @@ def loginPage(request):
             return redirect('feed')
         else:
             messages.info(request, 'Usuario o contraseña incorrectas')
-            print('Usuario incorrecto')
-
     return render(request, 'login.html')
+
+def bet_list(request):
+    me = request.user
+    bets = Bet.objects.filter( student__user = me)
+    return render(request, 'bets.html', {'bets':bets})
 
 class GetPosts(View):
     def get(self, request, page=0):
