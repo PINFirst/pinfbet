@@ -1,0 +1,27 @@
+.circle-img {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.circle-img img {
+    height: 100%;
+    transform: translateX(-50%);
+    margin-left: 50%;
+}
+
+.entry:not(:first-of-type)
+{
+    margin-top: 10px;
+}
+
+#btnSubject {
+    margin-left: 10px;
+    text-align: center;
+}
+
+#activeSubjects{
+    margin-bottom: 50px;
+}
