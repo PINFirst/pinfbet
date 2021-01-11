@@ -22,7 +22,6 @@
 
         var scrl_pos = window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
 
-        // if scrollbar reaces to bottom
         if (document.body.scrollHeight <= (scrl_pos + win_h) && !atBottom) {
 
             let thereArePost = await getPosts(nPosts)
@@ -37,7 +36,6 @@
             atBottom = false
     }
 
-// register event on scrollbar
 window.onscroll = whenScrlBottom
 
 </script>
