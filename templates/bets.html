@@ -52,10 +52,11 @@
                     <td> <input type="number" min="0" max="10" required name="actual_grade"> </td>
                     <td> <button type="submit" class="btn btn-light">Cobrar apuesta</button> </td>
                 {% endif %}
-                <td> <input type="hidden" name="bet_grade" value="{{bet.grade}}"> </td>
+                <td> <input type="hidden" name="bet_grade" value="{{bet.bet_grade}}"> </td>
                 <input type="hidden" name="bet_coins" value="{{bet.coins}}">
                 <input type="hidden" name="student_id" value="{{bet.student.id}}">
                 <input type="hidden" name="bet_id" value="{{bet.id}}">
+                <input type="hidden" name="pass_rate" value="{{bet.subject.pass_rate}}">
             </form>
         </tr>
         {% endfor %}

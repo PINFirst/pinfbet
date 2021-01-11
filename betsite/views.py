@@ -150,15 +150,15 @@ def bet_list(request):
         actual_grade = request.POST.get('actual_grade')
         bet_grade = request.POST.get('bet_grade')
         bet_coins = request.POST.get('bet_coins')
+        pass_rate = request.POST.get('pass_rate')
         student = Student.objects.get(id=request.POST.get('student_id'))
         bet = Bet.objects.get(id=request.POST.get('bet_id'))
         if actual_grade == bet_grade:
-            student.coins += float(bet_coins)*2
+            student.coins += float(bet_coins)/float(pass_rate)
             student.save()
         bet.paid = True
         bet.actual_grade = request.POST.get('actual_grade')
         bet.save()
-        print('coins actualizadas: ' + str(student.coins))
 
     return render(request, 'bets.html', {'bets':bets})
 
