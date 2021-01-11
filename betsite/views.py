@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django import forms
 from django.views import View
@@ -118,7 +119,7 @@ class Terms(View):
 
 class Feed(View):
     template = 'feed/feed.html'
-    
+
     def get(self, request):
         return render(request, self.template)
 
@@ -137,10 +138,26 @@ def loginPage(request):
             messages.info(request, 'Usuario o contraseña incorrectas')
     return render(request, 'login.html')
 
+@login_required(login_url='login')
 def bet_list(request):
     me = request.user
-    bets = Bet.objects.filter( student__user = me)
+    bets = Bet.objects.filter(student__user = me)
+    if request.method == 'POST':
+        actual_grade = request.POST.get('actual_grade')
+        bet_grade = request.POST.get('bet_grade')
+        bet_coins = request.POST.get('bet_coins')
+        student = Student.objects.get(id=request.POST.get('student_id'))
+        bet = Bet.objects.get(id=request.POST.get('bet_id'))
+        if actual_grade == bet_grade:
+            student.coins += float(bet_coins)*2
+            student.save()
+        bet.paid = True
+        bet.actual_grade = request.POST.get('actual_grade')
+        bet.save()
+        print('coins actualizadas: ' + str(student.coins))
+
     return render(request, 'bets.html', {'bets':bets})
+
 
 class GetPosts(View):
     def get(self, request, page=0):
