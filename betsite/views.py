@@ -13,7 +13,7 @@ from datetime import datetime
 import json
 from .database import data_posts, data_users
 from .models import Bet
-
+from decimal import *
 
 def time_ago_aux(ago, cal):
     return (ago, cal) if ago == 1 else (ago, cal + 's')
@@ -146,21 +146,22 @@ def logoutUser(request):
 def bet_list(request):
     me = request.user
     bets = Bet.objects.filter(student__user = me)
+    student = Student.objects.get(user = me)
     if request.method == 'POST':
         actual_grade = request.POST.get('actual_grade')
         bet_grade = request.POST.get('bet_grade')
         bet_coins = request.POST.get('bet_coins')
         pass_rate = request.POST.get('pass_rate')
-        student = Student.objects.get(id=request.POST.get('student_id'))
         bet = Bet.objects.get(id=request.POST.get('bet_id'))
         if actual_grade == bet_grade:
-            student.coins += float(bet_coins)/float(pass_rate)
+            getcontext().prec = 2
+            student.coins += Decimal(bet_coins)/Decimal(pass_rate)
             student.save()
         bet.paid = True
         bet.actual_grade = request.POST.get('actual_grade')
         bet.save()
 
-    return render(request, 'bets.html', {'bets':bets})
+    return render(request, 'bets.html', {'bets':bets, 'student':student})
 
 
 class GetPosts(View):

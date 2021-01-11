@@ -20,7 +20,7 @@ class Subject(models.Model):
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics', verbose_name='Imagen de perfil')
-    coins = models.FloatField(default=0)
+    coins = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     current_subjects = models.ManyToManyField(Subject, verbose_name='Asignaturas matriculadas')
     passed_subjects = models.ManyToManyField(Subject, blank=True, verbose_name='Asignaturas aprobadas', related_name='passed_subjects')
 
@@ -37,7 +37,7 @@ class Bet(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name='Asignatura')
     bet_grade = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(0)], verbose_name='Nota apostada')
     actual_grade = models.IntegerField(null=True, blank=True, validators=[MaxValueValidator(10), MinValueValidator(0)], verbose_name='Nota sacada')
-    coins = models.FloatField()
+    coins = models.DecimalField(default=0, max_digits=10, decimal_places=2)
     paid = models.BooleanField(default=False)
     start_date = models.DateTimeField(auto_now_add=True, verbose_name='Fecha apuesta')
     end_date = models.DateTimeField(verbose_name='Fecha fin de apuesta')
