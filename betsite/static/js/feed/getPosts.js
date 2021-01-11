@@ -1,6 +1,5 @@
-function createSocialSection(index, userLoggedImage, userName) {
-    args = userName+","+index
-    console.log(args)
+function createSocialSection(index, userLoggedImage) {
+
     return " <div class=\"d-flex flex-column comment-section \" id=\"myGroup" + index + "\">\n" +
         "    <div class=\"p-2 p-2 border-bottom\">\n" +
         "        <div class=\"d-flex flex-row fs-12\">\n" +
@@ -42,8 +41,6 @@ function createSocialSection(index, userLoggedImage, userName) {
 
 function createCard(card) {
 
-    console.log(card)
-
     let socialSection = createSocialSection(card.id, card.profile_img, card.User)
 
     let post =
@@ -51,7 +48,7 @@ function createCard(card) {
         "    <div id =\"post-header\" class=\" d-flex flex-row justify-content-between align-items-center p-3 \">\n" +
         "        <div class=\"d-flex flex-row align-items-center feed-text\">\n" +
         "            <div class=\"circle-img img-circle rounded-circle\">\n" +
-        "                <img src=\"https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg\">\n" +
+        "                <img src=\""+card.profile_img+"\">\n" +
         "            </div>\n" +
         "            <div id=\"post-info\" class=\"d-flex flex-column flex-wrap ml-2\">\n" +
         "                <span class=\"font-weight-bold\" id=\"post-user\">@" + card.User + "</span>\n" +
@@ -75,18 +72,13 @@ function createCard(card) {
 
 
     card.comments.forEach((comment) => {
-        console.log(comment)
         addComment("@" + comment.User, comment.profile_img, card.id, comment.message)
     })
 
     $("#commentsCounter" + card.id).html(card.comments.length)
     $("#likesCounter" + card.id).html(card.likes.length)
     let userId = 1
-    console.log('user id')
-    console.log(userId)
-    console.log(card.likes)
 
-    console.log(userId in card.likes)
     if (card.likes.includes(userId)) {
 
         document.getElementById("likeBtn-" + card.id ).style.color = 'orange'
@@ -98,9 +90,6 @@ function createCard(card) {
 
 function createPost(posts) {
 
-    console.log(posts)
-
-    // data['posts'].forEach(createCard)
     posts.forEach(createCard)
 
 }

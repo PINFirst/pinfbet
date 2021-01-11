@@ -76,6 +76,7 @@ def get_post(post_id):
 
 
 class HandleLike(View):
+
     def post(self, request):
         request_data = json.loads(request.body)
         user_id = get_user_id(request_data['user'])
@@ -112,7 +113,14 @@ def register(request):
 
 class Terms(View):
     template = 'Terms.html'
-    
+
+    def get(self, request):
+        return render(request, self.template)
+
+
+class Profile(View):
+    template = 'profile/profile.html'
+
     def get(self, request):
         return render(request, self.template)
 
@@ -122,7 +130,6 @@ class Feed(View):
 
     def get(self, request):
         return render(request, self.template)
-
 
 
 def loginPage(request):
@@ -137,6 +144,7 @@ def loginPage(request):
         else:
             messages.info(request, 'Usuario o contraseña incorrectas')
     return render(request, 'login.html')
+
 
 def logoutUser(request):
     logout(request)
