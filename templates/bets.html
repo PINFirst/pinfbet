@@ -7,6 +7,7 @@
     <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body style="background-color: #212529;">
@@ -16,10 +17,11 @@
         </div>
     </header>
     {% include 'base/navbar.html' %}
+
     <table class="table table-dark">
       <thead>
         <tr>
-          <th scope="col">Alumno</th>
+          <th scope="col">Id</th>
           <th scope="col">Amigo</th>
           <th scope="col">Asignatura</th>
           <th scope="col">Nota apostada</th>
@@ -31,14 +33,30 @@
       <tbody>
         {% for bet in bets %}
         <tr>
-            <td>{{bet.student.name}}</td>
+            <td>{{bet.id}}</td>
             <td>{{bet.friend}}</td>
             <td>{{bet.subject}}</td>
-            <td>{{bet.grade}}</td>
+            <td>{{bet.bet_grade}}</td>
             <td>{{bet.coins}}</td>
             <td>{{bet.end_date|date:'d/m/Y H:i:s'}}</td>
-            <td> <input type="number" min="0" max="10"> </td>
-            <td> <button type="button" class="btn btn-light">Cobrar apuesta</button> </td>
+            <form method="POST">
+                {% csrf_token %}
+                {% if bet.paid %}
+                    <td>{{bet.actual_grade}}</td>
+                    {% if bet.bet_grade == bet.actual_grade %}
+                <td><span style="color:green; font-size:18px;">&#8593;<i class="fa fa-btc"></i></span></td>
+                    {% else %}
+                <td> <span style="color:red; font-size:18px;"> &#8595;<i class="fa fa-btc"></i></span></td>
+                    {% endif %}
+                {% else %}
+                    <td> <input type="number" min="0" max="10" required name="actual_grade"> </td>
+                    <td> <button type="submit" class="btn btn-light">Cobrar apuesta</button> </td>
+                {% endif %}
+                <td> <input type="hidden" name="bet_grade" value="{{bet.grade}}"> </td>
+                <input type="hidden" name="bet_coins" value="{{bet.coins}}">
+                <input type="hidden" name="student_id" value="{{bet.student.id}}">
+                <input type="hidden" name="bet_id" value="{{bet.id}}">
+            </form>
         </tr>
         {% endfor %}
       </tbody>
