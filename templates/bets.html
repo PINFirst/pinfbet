@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis apuestas</title>
+
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body style="background-color: #212529;">
+    <header>
+        <div class="d-flex flex-md-fill justify-content-start" style= "background:orange; font-family:Lobster;">
+            <h1>P1nfBET</h1>
+        </div>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="nav-link" href="{% url 'feed' %}" style="color: #ffffff80;">Feed</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="navbar-brand" href="{% url 'bets' %}">Apuestas <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Amigos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-btc" id="coins"> {{student.coins}} </i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    {% include "base/search_bar.html" %}
+    <span><a class="nav-link" href="{% url 'logout' %}" style="color:rgba(255,255,255,.5);">Logout</a></span>
+</nav>
+
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Amigo</th>
+          <th scope="col">Asignatura</th>
+          <th scope="col">Nota apostada</th>
+          <th scope="col">Coins</th>
+          <th scope="col">Fecha finalización</th>
+          <th scope="col">Nota sacada</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bet in bets %}
+        <tr>
+            <td>{{bet.id}}</td>
+            <td>{{bet.friend}}</td>
+            <td>{{bet.subject}}</td>
+            <td>{{bet.bet_grade}}</td>
+            <td>{{bet.coins}}</td>
+            <td>{{bet.end_date|date:'d/m/Y H:i:s'}}</td>
+            <form method="POST">
+                {% csrf_token %}
+                {% if bet.paid %}
+                    <td>{{bet.actual_grade}}</td>
+                    {% if bet.bet_grade == bet.actual_grade %}
+                <td><span style="color:green; font-size:18px;">&#8593;<i class="fa fa-btc"></i></span></td>
+                    {% else %}
+                <td> <span style="color:red; font-size:18px;"> &#8595;<i class="fa fa-btc"></i></span></td>
+                    {% endif %}
+                {% else %}
+                    <td> <input type="number" min="0" max="10" required name="actual_grade"> </td>
+                    <td> <button type="submit" class="btn btn-light">Cobrar apuesta</button> </td>
+                {% endif %}
+                <td> <input type="hidden" name="bet_grade" value="{{bet.bet_grade}}"> </td>
+                <input type="hidden" name="bet_coins" value="{{bet.coins}}">
+                <input type="hidden" name="student_id" value="{{bet.student.id}}">
+                <input type="hidden" name="bet_id" value="{{bet.id}}">
+                <input type="hidden" name="pass_rate" value="{{bet.subject.pass_rate}}">
+            </form>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</body>
+</html>

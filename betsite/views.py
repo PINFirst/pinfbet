@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django import forms
 from django.views import View
@@ -11,7 +12,8 @@ from django.contrib.auth import login, authenticate, logout
 from datetime import datetime
 import json
 from .database import data_posts, data_users
-
+from .models import Bet
+from decimal import *
 
 def time_ago_aux(ago, cal):
     return (ago, cal) if ago == 1 else (ago, cal + 's')
@@ -141,9 +143,33 @@ def loginPage(request):
             return redirect('feed')
         else:
             messages.info(request, 'Usuario o contraseña incorrectas')
-            print('Usuario incorrecto')
-
     return render(request, 'login.html')
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
+@login_required(login_url='login')
+def bet_list(request):
+    me = request.user
+    bets = Bet.objects.filter(student__user = me)
+    student = Student.objects.get(user = me)
+    if request.method == 'POST':
+        actual_grade = request.POST.get('actual_grade')
+        bet_grade = request.POST.get('bet_grade')
+        bet_coins = request.POST.get('bet_coins')
+        pass_rate = request.POST.get('pass_rate')
+        bet = Bet.objects.get(id=request.POST.get('bet_id'))
+        if actual_grade == bet_grade:
+            getcontext().prec = 2
+            student.coins += Decimal(bet_coins)/Decimal(pass_rate)
+            student.save()
+        bet.paid = True
+        bet.actual_grade = request.POST.get('actual_grade')
+        bet.save()
+
+    return render(request, 'bets.html', {'bets':bets, 'student':student})
 
 
 class GetPosts(View):
