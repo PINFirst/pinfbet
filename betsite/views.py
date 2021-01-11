@@ -138,6 +138,10 @@ def loginPage(request):
             messages.info(request, 'Usuario o contraseña incorrectas')
     return render(request, 'login.html')
 
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
 @login_required(login_url='login')
 def bet_list(request):
     me = request.user
