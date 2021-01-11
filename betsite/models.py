@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class Subject(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre asignatura')
     course = models.CharField(max_length=100, verbose_name='Curso')
-    pass_rate = models.FloatField(verbose_name='Tasa de aprobados')
+    pass_rate = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(1)], verbose_name='Tasa de aprobados')
 
     def __str__(self):
         return self.name
