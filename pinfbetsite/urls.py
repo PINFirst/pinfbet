@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from betsite import views
 
 urlpatterns = [
@@ -32,5 +31,14 @@ urlpatterns = [
     path('feed/delete_post', views.DeletePost.as_view()),
     path('feed/handle_like', views.HandleLike.as_view()),
     path('SignUp/', views.register, name='SignUp'),
-    path('SignUp/Terms/', views.Terms.as_view(), name='Terms')
+    path('SignUp/Terms/', views.Terms.as_view(), name='Terms'),
+    path('search/', views.account_search_view, name="search"),
+    path('account/<user_id>/', views.account_view, name='view'),
+    path('list/<user_id>', views.friends_list_view, name='list'),
+    path('friend/friend_request/', views.send_friend_request, name='friend-request'),
+    path('friend_request/<user_id>/',views.friend_requests, name="friend-requests"),
+    path('accept_friend_request/<friend_request_id>/', views.accept_friend_request, name="friend-request-accept"),
+    path('friend_remove/', views.remove_friend, name="remove-friend"),
+    path('friend_request_cancel/', views.cancel_friend_request, name='friend-request-cancel'),
+    path('friend_request_decline/<friend_request_id>/', views.decline_friend_request, name='friend-request-decline'),
 ]
