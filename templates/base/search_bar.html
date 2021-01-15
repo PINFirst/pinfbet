@@ -1,0 +1,21 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/navbar/search_bar.css' %}"/>
+
+<form class="form-inline justify-content-end" onsubmit="return executeQuery();">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search"
+           aria-label="Search" id="id_q">
+    <button class="btn my-2 my-sm-0" type="submit" >
+        <i class="fa fa-search"></i>
+    </button>
+</form>
+
+<script type="text/javascript">
+
+	function executeQuery() {
+		var query = ""
+		query = document.getElementById('id_q').value;
+	    window.location.replace("{% url 'search' %}?q=" + query)
+	    return false
+	}
+
+</script>

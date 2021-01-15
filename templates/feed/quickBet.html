@@ -1,0 +1,133 @@
+<div id="quickBet" class="d-flex flex-row justify-content-between align-items-center p-2 bg-white border">
+    <div class="feed-text px-2">
+        <h6 class="mt-2">Realizar apuesta</h6>
+    </div>
+    <div class="feed-icon px-2">
+        <i id="plusButton" class="fa fa-plus" data-toggle="collapse" href="#collapseQuickBet" role="button"
+           aria-expanded="false" aria-controls="collapseQuickBet"></i>
+    </div>
+</div>
+<div class=" collapse
+        " id="collapseQuickBet">
+    <div class="card card-body">
+        <form id="betForm" method="post" action="">{% csrf_token %}
+            <div class="form-group">
+                <label for="betControlSelect">Apuesta</label>
+                <select required class="form-control" id="betControlSelect">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option>Aprueba</option>
+                    <option>Suspende</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="subjectControlSelect">Asignatura</label>
+                <select required class="form-control" id="subjectControlSelect">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option>EDNL</option>
+                    <option>PINF</option>
+                    <option>AAED</option>
+                    <option>DA</option>
+                    <option>MD</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gradeControlSelect">Nota</label>
+                <select required multiple class="form-control" id="gradeControlSelect">
+                    <optgroup id="failedOptions" disabled>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </optgroup>
+
+                    <optgroup id="passedOptions" disabled>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cuantia">Número de Coins apostadas</label>
+              <input required type="number" min="1" step="1" class="form-control" id="cuantia" placeholder="123">
+            </div>
+            <div class="form-group">
+                <label for="messageFormControlTextArea">Mensaje</label>
+                <textarea required class="form-control" id="messageFormControlTextArea" rows="3"
+                          placeholder="Escriba un mensaje..."></textarea>
+            </div>
+
+
+            <a id="submitBetButton" class="btn btn-primary" onclick=sendPost('bet')>Submit</a>
+
+        </form>
+
+    </div>
+
+
+</div>
+
+<script>
+    let betControl = $("#betControlSelect")
+    let messageControl = $("#messageFormControlTextArea")
+    let subjectControl = $("#subjectControlSelect")
+    let gradeControl = $("#gradeControlSelect")
+    let plusButton = $("#plusButton")
+    let coinsControl =$("#cuantia")
+
+    betControl.on("change", function () {
+        console.log($('#gradeControlSelect').val(""))
+        let passedOptions = $('#passedOptions')
+        let failedOptions = $('#failedOptions')
+        if (this.value === 'Aprueba') {
+            passedOptions.prop('disabled', false);
+            failedOptions.prop('disabled', true);
+            passedOptions.prop('hidden', false);
+            failedOptions.prop('hidden', true);
+
+
+        } else {
+            passedOptions.prop('disabled', true);
+            failedOptions.prop('disabled', false);
+            passedOptions.prop('hidden', true);
+            failedOptions.prop('hidden', false);
+        }
+    })
+
+    messageControl.on("click", function () {
+        $(this).removeClass('error')
+        $(this).attr('placeholder', 'Escriba un mensaje...')
+    })
+
+    betControl.on("click", function () {
+        $(this).removeClass('error')
+    })
+
+    subjectControl.on("click", function () {
+        $(this).removeClass('error')
+    })
+
+    gradeControl.on("click", function () {
+        $(this).removeClass('error')
+    })
+
+    coinsControl.on("click", function () {
+        $(this).removeClass('error')
+    })
+
+    plusButton.on("click", function () {
+        $('#betForm').trigger("reset")
+
+        messageControl.removeClass('error')
+        messageControl.attr('placeholder', 'Escriba un mensaje...')
+        betControl.removeClass('error')
+        subjectControl.removeClass('error')
+        gradeControl.removeClass('error')
+        coinsControl.removeClass('error')
+
+    })
+</script>

@@ -26,7 +26,7 @@ SECRET_KEY = '@*erw9@x&ew6m^v+@^s@6s#gm!^5@__#c3_gl*gc9gn#edzb^r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.33','127.0.0.1']
 
 
 # Application definition
@@ -80,6 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
            'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
 
     }
@@ -124,3 +125,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+BASE_URL = "http://127.0.0.1:8000"
