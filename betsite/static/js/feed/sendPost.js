@@ -1,7 +1,7 @@
 async function sendPost(type) {
 
     let csrfToken = getCookie('csrftoken')
-    let userName = 'jeff'
+    let userName = 'Jeff'
 
     let subject = $('#subjectControlSelect')
     let bet = $('#betControlSelect')

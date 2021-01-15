@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django import forms
 from django.views import View
@@ -13,7 +14,8 @@ from .database import data_posts, data_users
 from pinfbetsite.utils import get_friend_request_or_false
 from pinfbetsite.friend_request_status import FriendRequestStatus
 import json
-
+from .models import Bet
+from decimal import *
 
 def time_ago_aux(ago, cal):
     return (ago, cal) if ago == 1 else (ago, cal + 's')
@@ -76,6 +78,7 @@ def get_post(post_id):
 
 
 class HandleLike(View):
+
     def post(self, request):
         request_data = json.loads(request.body)
         user_id = get_user_id(request_data['user'])
@@ -121,6 +124,13 @@ class Terms(View):
         return render(request, self.template)
 
 
+class Profile(View):
+    template = 'profile/profile.html'
+    
+    def get(self, request):
+        return render(request, self.template)
+
+
 class Feed(View):
     template = 'feed/feed.html'
 
@@ -146,10 +156,33 @@ def loginPage(request):
             return redirect('feed')
         else:
             messages.info(request, 'Usuario o contraseña incorrectas')
-            print('Usuario incorrecto')
-
     return render(request, 'login.html')
 
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
+@login_required(login_url='login')
+def bet_list(request):
+    me = request.user
+    bets = Bet.objects.filter(student__user = me)
+    student = Student.objects.get(user = me)
+    if request.method == 'POST':
+        actual_grade = request.POST.get('actual_grade')
+        bet_grade = request.POST.get('bet_grade')
+        bet_coins = request.POST.get('bet_coins')
+        pass_rate = request.POST.get('pass_rate')
+        bet = Bet.objects.get(id=request.POST.get('bet_id'))
+        if actual_grade == bet_grade:
+            getcontext().prec = 2
+            student.coins += Decimal(bet_coins)/Decimal(pass_rate)
+            student.save()
+        bet.paid = True
+        bet.actual_grade = request.POST.get('actual_grade')
+        bet.save()
+
+    return render(request, 'bets.html', {'bets':bets, 'student':student})
 
 class GetPosts(View):
     def get(self, request, page=0):
