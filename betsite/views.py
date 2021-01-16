@@ -79,6 +79,12 @@ def get_post(post_id):
     return None
 
 
+def get_student(request):
+    me = request.user
+    student = Student.objects.get(user=me)
+    return student
+
+
 class HandleLike(View):
 
     def post(self, request):
@@ -131,7 +137,8 @@ class Profile(LoginRequiredMixin, View):
     login_url = 'login'
 
     def get(self, request):
-        return render(request, self.template)
+        student = get_student(request)
+        return render(request, self.template, {'student': student})
 
 
 class Feed(LoginRequiredMixin, View):
@@ -139,14 +146,16 @@ class Feed(LoginRequiredMixin, View):
     login_url = 'login'
 
     def get(self, request):
-        return render(request, self.template)
+        student = get_student(request)
+        return render(request, self.template, {'student': student})
 
 
 class Friends(View):
     template = 'friends.html'
 
     def get(self, request):
-        return render(request, self.template)
+        student = get_student(request)
+        return render(request, self.template , {'student': student})
 
 
 def loginPage(request):
@@ -266,10 +275,12 @@ def account_search_view(request, *args, **kwargs):
 
     return render(request, "search_results.html", context)
 
+
 @login_required(login_url='login')
 def account_view(request, *args, **kwargs):
     context = {}
     user_id = kwargs.get("user_id")
+    student = get_student(request)
     try:
         account = User.objects.get(pk=user_id)
     except:
@@ -324,6 +335,7 @@ def account_view(request, *args, **kwargs):
         context['request_sent'] = request_sent
         context['friend_requests'] = friend_requests
         context['BASE_URL'] = settings.BASE_URL
+        context['student'] = student
         return render(request, "account.html", context)
 
 
