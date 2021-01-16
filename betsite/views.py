@@ -16,6 +16,8 @@ from pinfbetsite.friend_request_status import FriendRequestStatus
 import json
 from .models import Bet
 from decimal import *
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 def time_ago_aux(ago, cal):
     return (ago, cal) if ago == 1 else (ago, cal + 's')
@@ -124,15 +126,17 @@ class Terms(View):
         return render(request, self.template)
 
 
-class Profile(View):
+class Profile(LoginRequiredMixin, View):
     template = 'profile/profile.html'
-    
+    login_url = 'login'
+
     def get(self, request):
         return render(request, self.template)
 
 
-class Feed(View):
+class Feed(LoginRequiredMixin, View):
     template = 'feed/feed.html'
+    login_url = 'login'
 
     def get(self, request):
         return render(request, self.template)
@@ -163,11 +167,12 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
+
 @login_required(login_url='login')
 def bet_list(request):
     me = request.user
-    bets = Bet.objects.filter(student__user = me)
-    student = Student.objects.get(user = me)
+    bets = Bet.objects.filter(student__user=me)
+    student = Student.objects.get(user=me)
     if request.method == 'POST':
         actual_grade = request.POST.get('actual_grade')
         bet_grade = request.POST.get('bet_grade')
@@ -176,13 +181,14 @@ def bet_list(request):
         bet = Bet.objects.get(id=request.POST.get('bet_id'))
         if actual_grade == bet_grade:
             getcontext().prec = 2
-            student.coins += Decimal(bet_coins)/Decimal(pass_rate)
+            student.coins += Decimal(bet_coins) / Decimal(pass_rate)
             student.save()
         bet.paid = True
         bet.actual_grade = request.POST.get('actual_grade')
         bet.save()
 
-    return render(request, 'bets.html', {'bets':bets, 'student':student})
+    return render(request, 'bets.html', {'bets': bets, 'student': student})
+
 
 class GetPosts(View):
     def get(self, request, page=0):
@@ -260,7 +266,7 @@ def account_search_view(request, *args, **kwargs):
 
     return render(request, "search_results.html", context)
 
-
+@login_required(login_url='login')
 def account_view(request, *args, **kwargs):
     context = {}
     user_id = kwargs.get("user_id")
