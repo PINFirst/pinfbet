@@ -19,16 +19,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fa fa-btc" id="coins"> </i>
+                    <i class="fa fa-btc" id="coins"> {{student.coins}} </i>
                 </a>
             </li>
         </ul>
-
     </div>
     {% include "base/search_bar.html" %}
-    <script>
-        document.getElementById('coins').innerHTML =": "+ pinfCoins
-    </script>
 
     <span><a class="nav-link" href="{% url 'logout' %}" style="color:rgba(255,255,255,.5);">Logout</a></span>
 </nav>
