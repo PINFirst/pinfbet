@@ -1,19 +1,17 @@
 async function sendPost(type) {
 
     let csrfToken = getCookie('csrftoken')
-    let userName = 'Jeff'
 
     let subject = $('#subjectControlSelect')
     let bet = $('#betControlSelect')
     let grade = $('#gradeControlSelect')
     let message = $('#messageFormControlTextArea')
     let coins = $('#cuantia')
+    let pinfCoins = parseInt($('#coins').text())
 
-    console.log('coins')
-    console.log(coins.val())
-
-    if (subject.val() && bet.val() && grade.val() && message.val() && coins.val() && coins.val() <= pinfCoins) {
+    if (subject.val() && bet.val() && grade.val() && message.val() && coins.val() && parseInt(coins.val(), 10) <= pinfCoins && parseInt(coins.val(), 10) > 0) {
         try {
+            console.log('entré')
             let response = await fetch("send_post",
                 {
                     method: "post",
@@ -41,10 +39,13 @@ async function sendPost(type) {
 
             }
 
+            $('#coins').text(" ".concat(pinfCoins - parseInt(coins.val(), 10)))
+
             $("#betForm").trigger('reset')
             const myNode = document.getElementById("posts-content");
             myNode.innerHTML = '';
             await getPosts(0)
+
         } catch (e) {
             console.log(e)
 
@@ -66,9 +67,9 @@ async function sendPost(type) {
             message.toggleClass('error')
             message.attr('placeholder', 'No puede enviar un comentario vacio.')
         }
-        if(!coins.val() || coins.val() && coins.val() > pinfCoins) {
+        if (!coins.val() || coins.val() && parseInt(coins.val()) > pinfCoins) {
+            console.log('entro')
             coins.toggleClass('error')
-
         }
     }
 }
