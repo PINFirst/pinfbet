@@ -70,6 +70,9 @@ def get_user():
     user['profile_img'] = 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg'
     return user
 
+def get_user(user_id):
+    return User.objects.get(id=user_id)
+
 
 def get_post(post_id):
     for post in data_posts['posts']:
@@ -138,7 +141,8 @@ class Profile(LoginRequiredMixin, View):
 
     def get(self, request):
         student = get_student(request)
-        return render(request, self.template, {'student': student})
+        user = get_user(student.user_id)
+        return render(request, self.template, {'student': student, 'user': user})
 
 
 class Feed(LoginRequiredMixin, View):

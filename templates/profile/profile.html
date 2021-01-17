@@ -14,38 +14,37 @@
                     <h5 class="card-title">Información de usuario</h5>
 
                     <div id="profileImg" class="circle-img img-circle rounded-circle">
-                        <img id='urlImg' src="https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg">
+                        <img id='urlImg' src="{% static '/images/user.png' %}">
                     </div>
 
                     <div id="profileInfo">
                         <form id="formProfileInfo" method="post" action="">{% csrf_token %}
                             <div class="form-group mb-3">
                                 <label for="profileUrlImg" class="form-label">URL de su imagen</label>
-                                <input  required type="text" class="form-control" id="profileUrlImg">
+                                <input required type="text" class="form-control" id="profileUrlImg" placeholder="https://i.ytimg.com/vi/DwlzqcGhITA/maxresdefault.jpg">
                                 <div id="profileUrlImg" class="form-text"> Se recomienda una imagen de al menos 400x400
                                     pixels.
                                 </div>
                             </div>
                             <div class=" form-group mb-3">
                                 <label for="profileName" class="form-label">Nombre de usuario</label>
-                                <input required type="text" class="form-control" id="profileName">
+                                <input required type="text" class="form-control" id="profileName"
+                                       value="{{ user.username }}">
                                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                                 </div>
                             </div>
                             <div class=" form-group mb-3">
                                 <label for="profileEmail" class="form-label">Dirección de correo</label>
                                 <input type="email" class="form-control" id="profileEmail"
-                                       aria-describedby="emailHelp" disabled>
-                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                                </div>
+                                       aria-describedby="emailHelp" disabled value="{{ user.email }}">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="profilePass" class="form-label">Nuevo password</label>
-                                <input type="password" class="form-control" id="profilePass">
+                                <input type="password" class="form-control" id="profilePass" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;">
                             </div>
                             <div class="form-group">
                                 <label for="profileDescription">Biografía</label>
-                                <textarea class="form-control" id="profileDescription" rows="3"></textarea>
+                                <textarea class="form-control" id="profileDescription" rows="3" placeholder="Escribe aquí tu biografía"></textarea>
                             </div>
                         </form>
 
@@ -86,17 +85,16 @@
             if (profileImgUrl.val()) {
                 $('#urlImg').attr('src', profileImgUrl.val())
             }
-            if(!profileUser.val()) {
+            if (!profileUser.val()) {
                 profileUser.val(userProfile)
-            }
-            else {
+            } else {
                 userProfile = $('#profileName').val()
             }
 
             description = profileDescription.val()
             profileDescription.val(description)
 
-            if(!profilePass.val()) {
+            if (!profilePass.val()) {
                 profilePass = profilePass.val()
             }
 
@@ -109,9 +107,9 @@
             let subjectName = subject.text()
             let activeSubjectSelector = $('#activeSubjects')
             activeSubjectSelector.append('<li class="list-group-item">' + subjectName + '</li>')
-            $("#profileSubjectSelect option[value="+subjectName+"]").remove();
+            $("#profileSubjectSelect option[value=" + subjectName + "]").remove();
 
-            if(subjectSelector.children('option').length === 1){
+            if (subjectSelector.children('option').length === 1) {
                 console.log('hola')
                 subjectSelector.attr('disabled', true)
                 $('#btnSubject').attr('disabled', true)
@@ -122,7 +120,7 @@
 
         function addSubjects(subject, index) {
             let subjectSelect = $('#profileSubjectSelect')
-            subjectSelect.append('<option id="' + index + '" value="'+subject+'">' + subject + '</option>')
+            subjectSelect.append('<option id="' + index + '" value="' + subject + '">' + subject + '</option>')
 
         }
 
@@ -133,15 +131,15 @@
 
         $(document).ready(function () {
                 let email = 'jeff@alum.uca.es'
-                let userName = 'Jeff'
-                let description = 'Si me suicido es por culpa de esta asignatura; no es broma.'
+                {#let userName = 'Jeff'#}
+                let description = ''
                 let urlImg = 'https://images.pexels.com/photos/1370750/pexels-photo-1370750.jpeg'
                 let profilePass = '13435353'
-                $('#profileUrlImg').val(urlImg)
-                $('#profileEmail').val(email)
-                $('#profileName').val(userName)
-                $('#profileDescription').val(description)
-                $('#profilePass').val(profilePass)
+                {#$('#profileUrlImg').val(urlImg)#}
+                {#$('#profileEmail').val(email)#}
+                {#$('#profileName').val(userName)#}
+                {#$('#profileDescription').val(description)#}
+                {#$('#profilePass').val(profilePass)#}
                 handleSubjects()
 
                 $('#profileSubjectSelect').on('change', function () {
