@@ -155,7 +155,7 @@ class Friends(View):
 
     def get(self, request):
         student = get_student(request)
-        return render(request, self.template , {'student': student})
+        return render(request, self.template, {'student': student})
 
 
 def loginPage(request):
@@ -212,8 +212,9 @@ class SendPost(View):
         user = get_user()
         owner = 1
 
+        student = get_student(request)
+
         request_data = json.loads(request.body)
-        print(request_data)
 
         today = datetime.now()
 
@@ -238,6 +239,8 @@ class SendPost(View):
             }
 
             data_posts['posts'].insert(0, post)
+            student.coins -= int(request_data['coins'])
+            student.save()
 
         return HttpResponse(request)
 
